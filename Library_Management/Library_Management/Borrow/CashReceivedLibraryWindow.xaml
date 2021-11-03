@@ -1,0 +1,59 @@
+﻿<Window x:Class="Library_Management.Borrow.CashReceivedLibraryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management.Borrow"
+        Icon="/Images/Library_Icon.ico"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:Library_Management.UserControlLibrary"
+        DataContext="{StaticResource BorrowBookVM}"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="cashReceivedWindow"
+        
+        mc:Ignorable="d"
+        Title="CashReceivedWindow" Height="200" Width="400">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUcMess Tag="{Binding Title, ElementName=cashReceivedWindow}"></uc:ControlBarUcMess>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <WrapPanel Margin="0 10 0 0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="0 12 10 0" FontSize="14" FontWeight="Bold"  Text="Total Money"></TextBlock>
+
+                <TextBox TextWrapping="Wrap" Text="{Binding TotalBill, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  materialDesign:HintAssist.Hint="số tiền khách cần trả"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" Margin="20 0 0 0" materialDesign:TextFieldAssist.HasClearButton="True" Width="200" ></TextBox>
+            </WrapPanel>
+            
+            <WrapPanel Margin="0 10 0 0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="0 12 0 0" FontSize="14" FontWeight="Bold"  Text="Cash Received"></TextBlock>
+
+                <TextBox TextWrapping="Wrap" Text="{Binding CashReceived, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  materialDesign:HintAssist.Hint="số tiền khách trả"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" Margin="20 0 0 0" materialDesign:TextFieldAssist.HasClearButton="True" Width="200" ></TextBox>
+            </WrapPanel>
+
+            <Button Grid.Row="2" Command="{Binding SubmitCashReceivedCommand}" CommandParameter="{Binding ElementName=cashReceivedWindow}" Content="Submit" Margin="0 10 0 15" Width="100" ToolTip="Gửi"
+                    Background="#fed330" Foreground="Black" BorderBrush="Black" BorderThickness="1" Padding="0"  FontWeight="Bold" ></Button>
+        </Grid>
+    </Grid>
+</Window>

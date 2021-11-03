@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Library_ManagementModelStoreContainer" CdmEntityContainer="Library_ManagementEntities">
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Author">
+        <MappingFragment StoreEntitySet="Author">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorityHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.AuthorityHuman">
+        <MappingFragment StoreEntitySet="AuthorityHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuthorityStaffs">
+      <EntityTypeMapping TypeName="Library_ManagementModel.AuthorityStaff">
+        <MappingFragment StoreEntitySet="AuthorityStaff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillBookOfCustomers">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BillBookOfCustomer">
+        <MappingFragment StoreEntitySet="BillBookOfCustomer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+          <ScalarProperty Name="BorrowedDate" ColumnName="BorrowedDate" />
+          <ScalarProperty Name="DateOfRepayment" ColumnName="DateOfRepayment" />
+          <ScalarProperty Name="IdStatusBill" ColumnName="IdStatusBill" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillBookOfHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BillBookOfHuman">
+        <MappingFragment StoreEntitySet="BillBookOfHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+          <ScalarProperty Name="BorrowedDate" ColumnName="BorrowedDate" />
+          <ScalarProperty Name="DateOfRepayment" ColumnName="DateOfRepayment" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IdStatusBill" ColumnName="IdStatusBill" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillCustomerReturnBookLibraries">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BillCustomerReturnBookLibrary">
+        <MappingFragment StoreEntitySet="BillCustomerReturnBookLibrary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+          <ScalarProperty Name="DateOfRepayment" ColumnName="DateOfRepayment" />
+          <ScalarProperty Name="AllTheDepositAmount" ColumnName="AllTheDepositAmount" />
+          <ScalarProperty Name="AllFines" ColumnName="AllFines" />
+          <ScalarProperty Name="IdStatusBill" ColumnName="IdStatusBill" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillReturnBookHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BillReturnBookHuman">
+        <MappingFragment StoreEntitySet="BillReturnBookHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="IdStaff" ColumnName="IdStaff" />
+          <ScalarProperty Name="DateOfRepayment" ColumnName="DateOfRepayment" />
+          <ScalarProperty Name="IdStatusBill" ColumnName="IdStatusBill" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="BookPrice" ColumnName="BookPrice" />
+          <ScalarProperty Name="BorrowingIdHuman" ColumnName="BorrowingIdHuman" />
+          <ScalarProperty Name="BookSubject" ColumnName="BookSubject" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="IdLanguage" ColumnName="IdLanguage" />
+          <ScalarProperty Name="IdPublisher" ColumnName="IdPublisher" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="UrlImageBook" ColumnName="UrlImageBook" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookSubjects">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BookSubject">
+        <MappingFragment StoreEntitySet="BookSubject">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="ScoreInputSubject" ColumnName="ScoreInputSubject" />
+          <ScalarProperty Name="ScoreOuputSubject" ColumnName="ScoreOuputSubject" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BorrowBooks">
+      <EntityTypeMapping TypeName="Library_ManagementModel.BorrowBook">
+        <MappingFragment StoreEntitySet="BorrowBooks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="DateBorrowed" ColumnName="DateBorrowed" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+          <ScalarProperty Name="IdFined" ColumnName="IdFined" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="ContractualFine" ColumnName="ContractualFine" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fineds">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Fined">
+        <MappingFragment StoreEntitySet="Fined">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoryCreateTimeTables">
+      <EntityTypeMapping TypeName="Library_ManagementModel.HistoryCreateTimeTable">
+        <MappingFragment StoreEntitySet="HistoryCreateTimeTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUserStaff" ColumnName="IdUserStaff" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Humen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Human">
+        <MappingFragment StoreEntitySet="Human">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MS" ColumnName="MS" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+          <ScalarProperty Name="IdAuthorityHuman" ColumnName="IdAuthorityHuman" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UrlAvatarHuman" ColumnName="UrlAvatarHuman" />
+          <ScalarProperty Name="Forfeit" ColumnName="Forfeit" />
+          <ScalarProperty Name="PayFine" ColumnName="PayFine" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListBookCustomerBorrows">
+      <EntityTypeMapping TypeName="Library_ManagementModel.ListBookCustomerBorrow">
+        <MappingFragment StoreEntitySet="ListBookCustomerBorrow">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBillBookOfCustomer" ColumnName="IdBillBookOfCustomer" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListBookCustomerReturnBookLibraries">
+      <EntityTypeMapping TypeName="Library_ManagementModel.ListBookCustomerReturnBookLibrary">
+        <MappingFragment StoreEntitySet="ListBookCustomerReturnBookLibrary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBillCustomerReturnBookLibrary" ColumnName="IdBillCustomerReturnBookLibrary" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListBookLibraryBorrowHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.ListBookLibraryBorrowHuman">
+        <MappingFragment StoreEntitySet="ListBookLibraryBorrowHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBillBookOfHuman" ColumnName="IdBillBookOfHuman" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListDetleImages">
+      <EntityTypeMapping TypeName="Library_ManagementModel.ListDetleImage">
+        <MappingFragment StoreEntitySet="ListDetleImage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UrlImageDelete" ColumnName="UrlImageDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListReturnBookHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.ListReturnBookHuman">
+        <MappingFragment StoreEntitySet="ListReturnBookHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdBillReturnBookHuman" ColumnName="IdBillReturnBookHuman" />
+          <ScalarProperty Name="IdBook" ColumnName="IdBook" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Publishers">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Publisher">
+        <MappingFragment StoreEntitySet="Publisher">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoftwareFilePaths">
+      <EntityTypeMapping TypeName="Library_ManagementModel.SoftwareFilePath">
+        <MappingFragment StoreEntitySet="SoftwareFilePath">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FilePathName" ColumnName="FilePathName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="Library_ManagementModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusBills">
+      <EntityTypeMapping TypeName="Library_ManagementModel.StatusBill">
+        <MappingFragment StoreEntitySet="StatusBill">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusChangePasses">
+      <EntityTypeMapping TypeName="Library_ManagementModel.StatusChangePass">
+        <MappingFragment StoreEntitySet="StatusChangePass">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Library_ManagementModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeLines">
+      <EntityTypeMapping TypeName="Library_ManagementModel.TimeLine">
+        <MappingFragment StoreEntitySet="TimeLine">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeTables">
+      <EntityTypeMapping TypeName="Library_ManagementModel.TimeTable">
+        <MappingFragment StoreEntitySet="TimeTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTimeLine" ColumnName="IdTimeLine" />
+          <ScalarProperty Name="IdAuthorityStaff" ColumnName="IdAuthorityStaff" />
+          <ScalarProperty Name="IdHumanSunday" ColumnName="IdHumanSunday" />
+          <ScalarProperty Name="CheckIdHumanSundayWork" ColumnName="CheckIdHumanSundayWork" />
+          <ScalarProperty Name="IdHumanMonday" ColumnName="IdHumanMonday" />
+          <ScalarProperty Name="CheckIdHumanMondayWork" ColumnName="CheckIdHumanMondayWork" />
+          <ScalarProperty Name="IdHumanTuesday" ColumnName="IdHumanTuesday" />
+          <ScalarProperty Name="CheckIdHumanTuesdayWork" ColumnName="CheckIdHumanTuesdayWork" />
+          <ScalarProperty Name="IdHumanWednesday" ColumnName="IdHumanWednesday" />
+          <ScalarProperty Name="CheckIdHumanWednesdayWork" ColumnName="CheckIdHumanWednesdayWork" />
+          <ScalarProperty Name="IdHumanThursday" ColumnName="IdHumanThursday" />
+          <ScalarProperty Name="CheckIdHumanThursdayWork" ColumnName="CheckIdHumanThursdayWork" />
+          <ScalarProperty Name="IdHumanFriday" ColumnName="IdHumanFriday" />
+          <ScalarProperty Name="CheckIdHumanFridayWork" ColumnName="CheckIdHumanFridayWork" />
+          <ScalarProperty Name="IdHumanSaturday" ColumnName="IdHumanSaturday" />
+          <ScalarProperty Name="CheckIdHumanSaturdayWork" ColumnName="CheckIdHumanSaturdayWork" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+          <ScalarProperty Name="InnitiatedDate" ColumnName="InnitiatedDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserHumen">
+      <EntityTypeMapping TypeName="Library_ManagementModel.UserHuman">
+        <MappingFragment StoreEntitySet="UserHuman">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DateInitPass" ColumnName="DateInitPass" />
+          <ScalarProperty Name="IdStatusChangePass" ColumnName="IdStatusChangePass" />
+          <ScalarProperty Name="DatePasswordChange" ColumnName="DatePasswordChange" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserStaffs">
+      <EntityTypeMapping TypeName="Library_ManagementModel.UserStaff">
+        <MappingFragment StoreEntitySet="UserStaff">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdHuman" ColumnName="IdHuman" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdAuthorityStaff" ColumnName="IdAuthorityStaff" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ScoreInputBook" ColumnName="ScoreInputBook" />
+          <ScalarProperty Name="ScoreOuputBook" ColumnName="ScoreOuputBook" />
+          <ScalarProperty Name="CountDelete" ColumnName="CountDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

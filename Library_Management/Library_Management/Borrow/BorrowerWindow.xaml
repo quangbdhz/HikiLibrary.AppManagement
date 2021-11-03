@@ -1,0 +1,591 @@
+﻿<Window x:Class="Library_Management.Borrow.BorrowerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management.Borrow"
+        Icon="/Images/Library_Icon.ico"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"       
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:uc="clr-namespace:Library_Management.UserControlLibrary"
+        DataContext="{StaticResource ReceiveBookVM}"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="borrowerWindow"
+        
+        Title="Borrower" Height="730" Width="1295">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style x:Key="StyleTextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10 12 2 0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#2d3436" Name="girdMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=borrowerWindow}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <materialDesign:Card Margin="4 4 4 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBox Name="getIdHuman" Text="{Binding UserNameSearchUserHuman, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                    Margin="8 0 20 0" materialDesign:HintAssist.Hint="User Name" Visibility="{Binding OptionVisibilityHuman}"
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Hidden" IsEnabled="{Binding CheckIsEnabled}"
+                                    BorderThickness="0" MinWidth="150" VerticalAlignment="Center" />
+
+                                <Button  IsDefault="True" Command="{Binding CheckUserHumanCommand}" Content="Check" Margin="1" Width="100" ToolTip="kiểm tra" IsEnabled="{Binding CheckIsEnabled}"
+                                    Background="#12CBC4" FontWeight="Bold"   Foreground="Black" BorderBrush="Black" BorderThickness="1" Visibility="{Binding OptionVisibilityHuman}" Click="CheckUserHuman"></Button>
+
+                            </WrapPanel>
+                        </Grid>
+
+                        <WrapPanel Grid.Column="2">
+                            <Button Command="{Binding PrintBillCustomerReturnBookLibraryCommand}" Content="Bill Retrun Library" Padding="0" Margin="2 2 20 2" Width="130" ToolTip="Hóa đơn khách hàng trả sách cho thư viện"
+                                   Visibility="{Binding OptionVisibilityHuman}" Background="#D980FA" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                            </Button>
+
+                            <Button Command="{Binding PrintBillLibraryReturnBookPartnerCommand}" Content="Bill Retrun Partner" Padding="0" Margin="2 2 20 2" Width="130" ToolTip="Hóa đơn thư viện trả sách lại cho đối tác"
+                                   Visibility="{Binding OptionVisibilityHuman}" Background="#4cd137" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                            </Button>
+
+                            <Button Command="{Binding ChangePasswordUserHuman}" IsEnabled="{Binding IsEnabledCheckUserHuman}" Content="Change Pass" Padding="0" Margin="2 2 20 2" Width="100" ToolTip="Thêm"
+                                   Visibility="{Binding OptionVisibilityChangePass}" Background="#a29bfe" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                            </Button>
+
+                        </WrapPanel>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:Card Margin="4 4 4 4" Grid.Column="0">
+                    <dragablz:TabablzControl  Name="TabControlBook" >
+                        <dragablz:TabablzControl.InterTabController>
+                            <dragablz:InterTabController />
+                        </dragablz:TabablzControl.InterTabController>
+
+                        <TabItem  Header="Borrow Books">
+                            <Grid>
+                                <!--MouseUp="nameTabControlBookBorrow_MouseUp"-->
+                                <TabControl Name="nameTabControlBookBorrow"  TabStripPlacement="Left">
+                                    <TabControl.Resources>
+                                        <Style TargetType="{x:Type TabItem}">
+                                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                                            <Setter Property="Height" Value="70"></Setter>
+                                            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+                                            <Setter Property="HeaderTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <ContentPresenter Content="{TemplateBinding Content}">
+                                                            <ContentPresenter.LayoutTransform>
+                                                                <RotateTransform Angle="270" />
+                                                            </ContentPresenter.LayoutTransform>
+                                                        </ContentPresenter>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Padding" Value="3" />
+
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TabItem">
+                                                        <Border Name="Border" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="4,4,4,4" Margin="0,3">
+                                                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="0,1"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Border" Property="Background" Value="#badc58" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="False">
+                                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TabControl.Resources>
+
+                                    <TabItem  Header="Borrow" >
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <materialDesign:ColorZone Visibility="{Binding OptionVisibilityHuman}" Grid.Row="0" Mode="Dark" CornerRadius="2"  BorderBrush="White" BorderThickness="1" Panel.ZIndex="1" Margin="4 3" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Button IsEnabled="True" Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                                        <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
+                                                    </Button>
+
+                                                    <TextBox TextChanged="IdBookBorrow_TextChanged" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the id book borrow"  FontFamily="Segoe UI" FontWeight="Normal"
+                                                        Name="tb_IdBookBorrow" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
+
+                                                    <Grid Grid.Column="2">
+                                                        <!--     TextChanged="TextBoxSubject_TextChanged"   -->
+                                                        <ComboBox Name="cbx_OptionSearchBorrowBook"  SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
+                                                              materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                                                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
+                                                              BorderBrush="{DynamicResource MaterialDesignPaper}" DropDownClosed="cbx_OptionSearchBorrowBook_DropDownClosed">
+                                                            <ComboBoxItem>Id</ComboBoxItem>
+                                                            <ComboBoxItem>Book Title</ComboBoxItem>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </Grid>
+                                            </materialDesign:ColorZone>
+
+                                            <ScrollViewer Grid.Row="1" PreviewMouseWheel="ListViewScrollViewerBorrow_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                                                <ListView Name="Lv_BorrowBook" ItemsSource="{Binding LvBorrowBook}" SelectedItem="{Binding SelectedItemBorrowBook, Mode=TwoWay}" TextElement.FontFamily="Segoe UI" TextElement.FontWeight="Normal">
+                                                    <ListView.ItemContainerStyle>
+                                                        <Style TargetType="ListViewItem">
+                                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                        </Style>
+                                                    </ListView.ItemContainerStyle>
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridView.ColumnHeaderContainerStyle>
+                                                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                                <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                    <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                                </Border>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="Foreground" Value="Black" />
+                                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                                    <Setter Property="Margin" Value="10 0 0 0" />
+                                                                    <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                </Style>
+
+                                                            </GridView.ColumnHeaderContainerStyle>
+
+                                                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
+                                                            <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding Human.DisplayName}"></GridViewColumn>
+                                                            <GridViewColumn Header="IdBook" DisplayMemberBinding="{Binding IdBook}"></GridViewColumn>
+                                                            <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding Book.DisplayName}"></GridViewColumn>
+                                                            <GridViewColumn Header="Date Borrowed" DisplayMemberBinding="{Binding DateBorrowed, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                            <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding DueDate, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.DisplayName}"></GridViewColumn>
+
+                                                            <GridViewColumn Header="Fined">
+                                                                <GridViewColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding Fined.DisplayName}" Foreground="{Binding Color}"></TextBlock>
+                                                                    </DataTemplate>
+                                                                </GridViewColumn.CellTemplate>
+                                                            </GridViewColumn>
+
+                                                            <GridViewColumn Header="ContractualFine" DisplayMemberBinding="{Binding ContractualFine}"></GridViewColumn>
+                                                            <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}"></GridViewColumn>
+                                                            <GridViewColumn  Header="{Binding ReturnBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                                                                <!-- HeaderContainerStyle="{StaticResource myHeaderStyle}"-->
+                                                                <GridViewColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button Visibility="{Binding DataContext.OptionVisibilityHuman, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                                        Command="{Binding ElementName=Lv_BorrowBook, Path=DataContext.CustomerReturnBookLibraryCommand}" 
+                                                                        CommandParameter="{Binding}" Background="Aqua" Foreground="Black" Content="Return"/>
+                                                                    </DataTemplate>
+                                                                </GridViewColumn.CellTemplate>
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </ScrollViewer>
+                                        </Grid>
+                                        
+                                       
+                                    </TabItem>
+
+                                    <TabItem Header="Solved">
+                                        <ScrollViewer PreviewMouseWheel="ListViewScrollViewerSolved_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                                            <ListView Name="Lv_BorrowBookSolved" ItemsSource="{Binding LvBorrowBookSloved}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" TextElement.FontFamily="Segoe UI" TextElement.FontWeight="Normal">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridView.ColumnHeaderContainerStyle>
+                                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                            <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                <Setter Property="Foreground" Value="Black" />
+                                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                                <Setter Property="Margin" Value="10 0 0 0" />
+                                                                <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                <Setter Property="FontSize" Value="14" />
+                                                            </Style>
+
+                                                        </GridView.ColumnHeaderContainerStyle>
+
+                                                        <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding Human.DisplayName}"></GridViewColumn>
+                                                        <GridViewColumn Header="IdBook" DisplayMemberBinding="{Binding IdBook}"></GridViewColumn>
+                                                        <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding Book.DisplayName}"></GridViewColumn>
+                                                        <GridViewColumn Header="Date Borrowed" DisplayMemberBinding="{Binding DateBorrowed, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                        <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding DueDate, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status.DisplayName}"></GridViewColumn>
+
+                                                        <GridViewColumn Header="Fined">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock Text="{Binding Fined.DisplayName}" Foreground="{Binding Color}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+
+                                                        <GridViewColumn Header="ContractualFine" DisplayMemberBinding="{Binding ContractualFine}"></GridViewColumn>
+                                                        <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}"></GridViewColumn>
+
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+
+                        </TabItem>
+
+                        <TabItem  Header="Book Loan">
+                            <Grid>
+                                <!--MouseUp="nameTabControlBookLoan_MouseUp"-->
+                                <TabControl Name="nameTabControlBookLoan" TabStripPlacement="Left">
+                                    <TabControl.Resources>
+                                        <Style TargetType="{x:Type TabItem}">
+                                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                                            <Setter Property="Height" Value="70"></Setter>
+                                            <Setter Property="FontFamily" Value="Comic Sans MS"></Setter>
+                                            <Setter Property="HeaderTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <ContentPresenter Content="{TemplateBinding Content}">
+                                                            <ContentPresenter.LayoutTransform>
+                                                                <RotateTransform Angle="270" />
+                                                            </ContentPresenter.LayoutTransform>
+                                                        </ContentPresenter>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Padding" Value="3" />
+
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TabItem">
+                                                        <Border Name="Border" BorderThickness="1,1,1,1" BorderBrush="Black" CornerRadius="4,4,4,4" Margin="0,3">
+                                                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="0,1"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Border" Property="Background" Value="#badc58" />
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="False">
+                                                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+
+
+                                    </TabControl.Resources>
+
+                                    <TabItem Header="Loan">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <materialDesign:ColorZone Visibility="{Binding OptionVisibilityHuman}" Grid.Row="0" Mode="Dark" CornerRadius="2"  BorderBrush="White" BorderThickness="1" Panel.ZIndex="1" Margin="4 3" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Button IsEnabled="True" Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                                        <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
+                                                    </Button>
+
+                                                    <TextBox TextChanged="IdBook_TextChanged"  Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the id book loan"  FontFamily="Segoe UI" FontWeight="Normal"
+                                                        Name="tb_IdBook" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
+
+                                                    <Grid Grid.Column="2">
+                                                        <!--     TextChanged="TextBoxSubject_TextChanged"   -->
+                                                        <ComboBox Name="cbx_OptionSearchBook"  SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
+                                                              materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                                                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
+                                                              BorderBrush="{DynamicResource MaterialDesignPaper}" DropDownClosed="cbx_OptionSearchBook_DropDownClosed">
+                                                            <ComboBoxItem>Id</ComboBoxItem>
+                                                            <ComboBoxItem>Book Title</ComboBoxItem>
+                                                        </ComboBox>
+                                                    </Grid>
+                                                </Grid>
+                                            </materialDesign:ColorZone>
+
+                                            <ScrollViewer Grid.Row="1" PreviewMouseWheel="ListViewScrollViewerLoan_PreviewMouseWheel" VerticalScrollBarVisibility="Auto">
+                                                <ListView Name="Lv_Book" ItemsSource="{Binding LvBook}" SelectedItem="{Binding SelectedItemBook, Mode=OneWayToSource}" TextElement.FontFamily="Segoe UI" TextElement.FontWeight="Normal">
+                                                    <ListView.ItemContainerStyle>
+                                                        <Style TargetType="ListViewItem">
+                                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                        </Style>
+                                                    </ListView.ItemContainerStyle>
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridView.ColumnHeaderContainerStyle>
+                                                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                                <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                    <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                                </Border>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="Foreground" Value="Black" />
+                                                                    <Setter Property="FontWeight" Value="DemiBold" />
+                                                                    <Setter Property="Margin" Value="10 0 0 0" />
+                                                                    <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                    <Setter Property="FontSize" Value="14" />
+                                                                </Style>
+
+                                                            </GridView.ColumnHeaderContainerStyle>
+
+                                                            <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding Human.DisplayName}"></GridViewColumn>
+                                                            <GridViewColumn Header="IdBook" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                                            <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                                            <GridViewColumn Header="Library Human" DisplayMemberBinding="{Binding Status1.DisplayName}"></GridViewColumn>
+                                                            <GridViewColumn Header="Date Borrowed" DisplayMemberBinding="{Binding LibraryDateBorrowed, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                            <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding LibraryDueDate, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                            <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}"></GridViewColumn>
+                                                            <GridViewColumn Header="{Binding ReturnBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                                                                <!-- HeaderContainerStyle="{StaticResource myHeaderStyle}"-->
+                                                                <GridViewColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <Button Visibility="{Binding DataContext.OptionVisibilityHuman, RelativeSource={RelativeSource AncestorType=ListView}}" 
+                                                                        Command="{Binding ElementName=Lv_Book, Path=DataContext.ReturnBookToHumanCommand}" 
+                                                                        CommandParameter="{Binding}" Background="Aqua" Foreground="Black" Content="Return"/>
+                                                                    </DataTemplate>
+                                                                </GridViewColumn.CellTemplate>
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </ScrollViewer>
+                                        </Grid>
+                                        
+                                        
+                                    </TabItem>
+
+                                    <TabItem Header="Returned">
+                                        <ScrollViewer PreviewMouseWheel="ListViewScrollViewerReturned_PreviewMouseWheel"  VerticalScrollBarVisibility="Auto">
+                                            <ListView Name="Lv_BookReturned" ItemsSource="{Binding LvBookReturned}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" TextElement.FontFamily="Segoe UI" TextElement.FontWeight="Normal">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridView.ColumnHeaderContainerStyle>
+                                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                            <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                <Setter Property="Foreground" Value="Black" />
+                                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                                <Setter Property="Margin" Value="10 0 0 0" />
+                                                                <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                <Setter Property="FontSize" Value="14" />
+                                                            </Style>
+
+                                                        </GridView.ColumnHeaderContainerStyle>
+
+                                                        <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding Human.DisplayName}"></GridViewColumn>
+                                                        <GridViewColumn Header="IdBook" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                                        <GridViewColumn Header="Book Title" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                                        <GridViewColumn Header="Library Human" DisplayMemberBinding="{Binding Status1.DisplayName}"></GridViewColumn>
+                                                        <GridViewColumn Header="Date Borrowed" DisplayMemberBinding="{Binding LibraryDateBorrowed, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                        <GridViewColumn Header="Due Date" DisplayMemberBinding="{Binding LibraryDueDate, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                                        <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}"></GridViewColumn>
+
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </ScrollViewer>
+                                    </TabItem>
+                                </TabControl>
+                            </Grid>
+                        </TabItem>
+                    </dragablz:TabablzControl>
+                </materialDesign:Card>
+
+                <materialDesign:Card Margin="0 4 4 4" Grid.Column="1">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <WrapPanel Margin="5 5 0 0" MaxWidth="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Width}">
+                                <TextBlock Style="{StaticResource StyleTextBlock}"  Text="Avatar " FontWeight="Bold"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0"  HorizontalAlignment="Center">
+                                <Image Margin="0 0 5 0" Width="230" MaxHeight="150" Source="{Binding Path=UrlAvatarHuman}" />
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock  Style="{StaticResource StyleTextBlock}" Text="Full Name"></TextBlock>
+
+                                <TextBlock Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="Green" FontSize="14" VerticalAlignment="Center"  Margin="10 12 2 0" ></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock  Style="{StaticResource StyleTextBlock}" Text="Date Of Birth"></TextBlock>
+
+                                <TextBlock Text="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, StringFormat=dd/MM/yyyy}" Foreground="Green" FontSize="14" VerticalAlignment="Center"  Margin="10 12 2 0"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock  Style="{StaticResource StyleTextBlock}" Text="Address"></TextBlock>
+
+                                <TextBlock Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="Green" FontSize="14" VerticalAlignment="Center"  Margin="10 12 2 0"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock  Style="{StaticResource StyleTextBlock}" Text="Gender"></TextBlock>
+
+                                <TextBlock Text="{Binding Gender, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="Green" FontSize="14" VerticalAlignment="Center"  Margin="10 12 2 0"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock  Style="{StaticResource StyleTextBlock}" Text="Email"></TextBlock>
+
+                                <TextBlock Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="Green" FontSize="14" VerticalAlignment="Center"  Margin="10 12 2 0"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <TextBlock Style="{StaticResource StyleTextBlock}" Text="Note"></TextBlock>
+
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                          VerticalAlignment="Center" MaxWidth="200" Foreground="Green" Margin="10 0 0 0" ></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 25 0 0">
+                                <TextBlock Style="{StaticResource StyleTextBlock}" Text="Comments"></TextBlock>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5 5 0 0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Ellipse  Margin="0 3 0 0" Grid.Column="0" Height="30" Width=" 30" VerticalAlignment="Top" Stroke="Gray" StrokeThickness="0.7">
+                                        <Ellipse.Fill>
+                                            <ImageBrush  RenderOptions.BitmapScalingMode="Fant" ImageSource="{Binding Path=UrlAvatarHuman}" Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Border Margin="5 3 5 0" Grid.Column="1" BorderThickness="1" BorderBrush="Black">
+                                        <TextBox Margin="1" BorderThickness="0" materialDesign:TextFieldAssist.DecorationVisibility="Collapsed" Width="200" TextWrapping="Wrap" MinHeight="80"
+                                                 materialDesign:HintAssist.Hint=" Write a comment..."></TextBox>
+                                    </Border>
+                                </Grid>
+                            </WrapPanel>
+                            <!--"-->
+                            <WrapPanel Margin="5" HorizontalAlignment="Right">
+                                <Button Command="{Binding Test}" Visibility="{Binding OptionVisibilityChangePass}" Style="{StaticResource MaterialDesignRaisedAccentButton}" 
+                                        materialDesign:ButtonAssist.CornerRadius="20"  Width="80" FontWeight="Bold" Padding="0" Height="25" Content="Send"></Button>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5" HorizontalAlignment="Right">
+                                <TextBox Visibility="Collapsed" Name="getIdStaff" Text="{Binding IdStaff}" materialDesign:ButtonAssist.CornerRadius="20" Width="80" FontWeight="Bold" Padding="0" Height="25" ></TextBox>
+                            </WrapPanel>
+
+                            <WrapPanel Margin="5" HorizontalAlignment="Right">
+                                <TextBox Visibility="Collapsed" Name="getRuleLoginBorrowBook" Text="{Binding GetRuleLoginBorrowBook}" materialDesign:ButtonAssist.CornerRadius="20" Width="80" FontWeight="Bold" Padding="0" Height="25" ></TextBox>
+                            </WrapPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </materialDesign:Card>
+                <!-- simplest form -->
+            </Grid>
+        </Grid>
+
+        <materialDesign:Snackbar HorizontalAlignment="Center" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Name="snackBar" IsActive="{Binding IsActive}">
+            <materialDesign:SnackbarMessage FontWeight="Black" FontStyle="Italic" Padding="0" FontSize="17" Foreground="Aqua" Content="{Binding WellComeHuman}"/>
+        </materialDesign:Snackbar>
+
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseDoubleClick">
+                <i:InvokeCommandAction Command="{Binding DoubleClickGridCommand}"
+                                 CommandParameter="{Binding ElementName=girdMain}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseUp">
+                <i:InvokeCommandAction Command="{Binding MouseUpBookGridCommand}"
+                                 CommandParameter="{Binding ElementName=girdMain}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </Grid>
+</Window>

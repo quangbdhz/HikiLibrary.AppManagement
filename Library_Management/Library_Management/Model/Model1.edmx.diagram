@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="33e336f68e074c80b52ca99518596f53" Name="Diagram1">
+        <EntityTypeShape EntityType="Library_ManagementModel.Author" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.AuthorityHuman" Width="1.5" PointX="0.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.AuthorityStaff" Width="1.5" PointX="9" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BillBookOfCustomer" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BillBookOfHuman" Width="1.5" PointX="8.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BillCustomerReturnBookLibrary" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BillReturnBookHuman" Width="1.5" PointX="5.25" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Book" Width="1.5" PointX="11.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BookSubject" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BorrowBook" Width="1.5" PointX="16.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Fined" Width="1.5" PointX="14.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Gender" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.HistoryCreateTimeTable" Width="1.5" PointX="13.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Human" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Language" Width="1.5" PointX="9" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.LibraryRegulation" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.ListBookCustomerBorrow" Width="1.5" PointX="13.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.ListBookCustomerReturnBookLibrary" Width="1.5" PointX="13.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.ListBookLibraryBorrowHuman" Width="1.5" PointX="16.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.ListDetleImage" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.ListReturnBookHuman" Width="1.5" PointX="16.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Publisher" Width="1.5" PointX="9" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.SoftwareFilePath" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Status" Width="1.5" PointX="9" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.StatusBill" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.StatusChangePass" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.sysdiagram" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.TimeLine" Width="1.5" PointX="6" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.TimeTable" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.UserHuman" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.UserStaff" Width="1.5" PointX="11.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BookAvailable_vi" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BookBorrowed_vi" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BookLiquidation_vi" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.BorrowBooks_vi" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_ManagementModel.Human_vi" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdAuthorityStaff_Users_TO_Id_Authority" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_BillBookOfCustomer_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_BillBookOfHuman_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_BillReturnBookHuman_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_BorrowingIdHuman_Book_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBook_BorrowBooks_TO_Id_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBook_ListBookCustomerBorrow_TO_Id_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdBook_ListReturnBookHuman_TO_Id_Book" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdLanguage_Book_TO_Id_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdPublisher_Book_TO_Id_Publisher" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatus_Book_TO_Id_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdFined_BorrowBooks_TO_Id_Fined" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_BorrowBooks_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatus_BorrowBooks_TO_Id_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdGender_Human_TO_Id_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_UserHuman_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHuman_UserStaff_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanFriday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanMonday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanSaturday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanSunday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanThursday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanTuesday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdHumanWednesday_TimeTable_TO_Id_Human" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_ManagementModel.FK_IdTimeLine_TimeTable_TO_Id_TimeLine" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Library_Management.ResourceXAML"
+                    xmlns:viewmodel="clr-namespace:Library_Management.ViewModel"
+                    xmlns:viewmodelControl="clr-namespace:Library_Management.ViewModel.ControlBarUc"
+                    xmlns:viewmodelBook="clr-namespace:Library_Management.ViewModel.Book"
+                    xmlns:viewmodelBorrow="clr-namespace:Library_Management.ViewModel.Borrow"
+                    xmlns:viewmodelHuman="clr-namespace:Library_Management.ViewModel.Human"
+                    xmlns:viewmodelStaff="clr-namespace:Library_Management.ViewModel.Staff"
+                    xmlns:viewmodelAdmin="clr-namespace:Library_Management.ViewModel.Admin"
+                    xmlns:viewmodelUserControl="clr-namespace:Library_Management.UserControlLibrary"
+                    >
+    
+    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodelControl:ControlBarViewModel x:Key="UcControlBar"></viewmodelControl:ControlBarViewModel>
+    <viewmodelControl:ControlBarAddBillViewModel x:Key="UcControlBarAddBill"></viewmodelControl:ControlBarAddBillViewModel>
+
+    <viewmodelBook:InfoBookViewModel x:Key="InfoBookVM"></viewmodelBook:InfoBookViewModel>
+    <viewmodelBook:BookViewModel x:Key="BookVM"></viewmodelBook:BookViewModel>
+    <viewmodelBook:AddBookViewModel x:Key="AddBookVM"></viewmodelBook:AddBookViewModel>
+    <viewmodelBook:EditBookViewModel x:Key="EditBookVM"></viewmodelBook:EditBookViewModel>
+
+    <viewmodelBorrow:BorrowBookViewModel x:Key="BorrowBookVM"></viewmodelBorrow:BorrowBookViewModel>
+    <viewmodelBorrow:BorrowerViewModel x:Key="BorrowerVM"></viewmodelBorrow:BorrowerViewModel>
+    <viewmodelBorrow:ReceiveBookViewModel x:Key="ReceiveBookVM"></viewmodelBorrow:ReceiveBookViewModel>
+
+    <viewmodelHuman:HumanViewModel x:Key="HumanVM"></viewmodelHuman:HumanViewModel>
+    <viewmodelHuman:AddHumanViewModel x:Key="AddHumanVM"></viewmodelHuman:AddHumanViewModel>
+    <viewmodelHuman:EditHumanViewModel x:Key="EditHumanVM"></viewmodelHuman:EditHumanViewModel>
+    <viewmodelHuman:ChangePassowrdUserHumanViewModel x:Key="ChangePassUserHumanVM"></viewmodelHuman:ChangePassowrdUserHumanViewModel>
+
+    <viewmodelStaff:TimeTableViewModel x:Key="TimeTableVM"></viewmodelStaff:TimeTableViewModel>
+    <viewmodelStaff:UserStaffViewModel x:Key="UserStaffVM"></viewmodelStaff:UserStaffViewModel>
+    <viewmodelStaff:AddUserStaffViewModel x:Key="AddUserStaffVM"></viewmodelStaff:AddUserStaffViewModel>
+    <viewmodelStaff:EditUserStaffViewModel x:Key="EditUserStaffVM"></viewmodelStaff:EditUserStaffViewModel>
+    <viewmodelStaff:ChangePassUserStaffViewModel x:Key="ChangePassUserStaffVM"></viewmodelStaff:ChangePassUserStaffViewModel>
+
+    <viewmodelAdmin:StatisticViewModel x:Key="StatisticVM"></viewmodelAdmin:StatisticViewModel>
+    <viewmodelAdmin:BillViewModel x:Key="BillVM"></viewmodelAdmin:BillViewModel>
+
+    <viewmodelUserControl:MyFilesViewModel x:Key="MyFilesVM"></viewmodelUserControl:MyFilesViewModel> 
+
+</ResourceDictionary>

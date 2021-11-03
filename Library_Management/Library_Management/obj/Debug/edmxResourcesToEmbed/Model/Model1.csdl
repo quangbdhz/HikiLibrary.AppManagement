@@ -1,0 +1,1848 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Library_ManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="load_data_Author_Result">
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+  </ComplexType>
+  <ComplexType Name="load_data_BookSubject_Result">
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ScoreInputSubject" Type="Int32" />
+    <Property Name="ScoreOuputSubject" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+  </ComplexType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AuthorityHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Humen" Relationship="Self.FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman" FromRole="AuthorityHuman" ToRole="Human" />
+  </EntityType>
+  <EntityType Name="AuthorityStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="TimeTables" Relationship="Self.FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff" FromRole="AuthorityStaff" ToRole="TimeTable" />
+    <NavigationProperty Name="UserStaffs" Relationship="Self.FK_IdAuthorityStaff_Users_TO_Id_Authority" FromRole="AuthorityStaff" ToRole="UserStaff" />
+  </EntityType>
+  <EntityType Name="BillBookOfCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" Nullable="false" />
+    <Property Name="BorrowedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateOfRepayment" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CashReceived" Type="Double" />
+    <Property Name="IdStatusBill" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="ListBookCustomerBorrows" Relationship="Self.FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer" FromRole="BillBookOfCustomer" ToRole="ListBookCustomerBorrow" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_BillBookOfCustomer_TO_Id_Human" FromRole="BillBookOfCustomer" ToRole="Human" />
+    <NavigationProperty Name="UserStaff" Relationship="Self.FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff" FromRole="BillBookOfCustomer" ToRole="UserStaff" />
+    <NavigationProperty Name="StatusBill" Relationship="Self.FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill" FromRole="BillBookOfCustomer" ToRole="StatusBill" />
+  </EntityType>
+  <EntityType Name="BillBookOfHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" Nullable="false" />
+    <Property Name="BorrowedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateOfRepayment" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IdStatusBill" Type="Int32" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="ListBookLibraryBorrowHumen" Relationship="Self.FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman" FromRole="BillBookOfHuman" ToRole="ListBookLibraryBorrowHuman" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_BillBookOfHuman_TO_Id_Human" FromRole="BillBookOfHuman" ToRole="Human" />
+    <NavigationProperty Name="UserStaff" Relationship="Self.FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff" FromRole="BillBookOfHuman" ToRole="UserStaff" />
+    <NavigationProperty Name="StatusBill" Relationship="Self.FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill" FromRole="BillBookOfHuman" ToRole="StatusBill" />
+  </EntityType>
+  <EntityType Name="BillCustomerReturnBookLibrary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" Nullable="false" />
+    <Property Name="DateOfRepayment" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AllTheDepositAmount" Type="Double" />
+    <Property Name="CashReceived" Type="Double" />
+    <Property Name="CustomerFined" Type="Double" />
+    <Property Name="AllFines" Type="Double" />
+    <Property Name="IdStatusBill" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="ListBookCustomerReturnBookLibraries" Relationship="Self.FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary" FromRole="BillCustomerReturnBookLibrary" ToRole="ListBookCustomerReturnBookLibrary" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human" FromRole="BillCustomerReturnBookLibrary" ToRole="Human" />
+    <NavigationProperty Name="UserStaff" Relationship="Self.FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff" FromRole="BillCustomerReturnBookLibrary" ToRole="UserStaff" />
+    <NavigationProperty Name="StatusBill" Relationship="Self.FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill" FromRole="BillCustomerReturnBookLibrary" ToRole="StatusBill" />
+  </EntityType>
+  <EntityType Name="BillReturnBookHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" Nullable="false" />
+    <Property Name="DateOfRepayment" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdStatusBill" Type="Int32" Nullable="false" />
+    <Property Name="LibraryFined" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="ListReturnBookHumen" Relationship="Self.FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman" FromRole="BillReturnBookHuman" ToRole="ListReturnBookHuman" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_BillReturnBookHuman_TO_Id_Human" FromRole="BillReturnBookHuman" ToRole="Human" />
+    <NavigationProperty Name="UserStaff" Relationship="Self.FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff" FromRole="BillReturnBookHuman" ToRole="UserStaff" />
+    <NavigationProperty Name="StatusBill" Relationship="Self.FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill" FromRole="BillReturnBookHuman" ToRole="StatusBill" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BookPrice" Type="Double" />
+    <Property Name="BorrowingIdHuman" Type="Int32" Nullable="false" />
+    <Property Name="BookSubject" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdLanguage" Type="Int32" Nullable="false" />
+    <Property Name="IdPublisher" Type="Int32" />
+    <Property Name="IdStatus" Type="Int32" Nullable="false" />
+    <Property Name="IdStatusReturnBookToHuman" Type="Int32" Nullable="false" />
+    <Property Name="LibraryDateBorrowed" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LibraryDueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Color" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateReturnBookToHuman" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UrlImageBook" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_BorrowingIdHuman_Book_TO_Id_Human" FromRole="Book" ToRole="Human" />
+    <NavigationProperty Name="BorrowBooks" Relationship="Self.FK_IdBook_BorrowBooks_TO_Id_Book" FromRole="Book" ToRole="BorrowBooks" />
+    <NavigationProperty Name="ListBookCustomerBorrows" Relationship="Self.FK_IdBook_ListBookCustomerBorrow_TO_Id_Book" FromRole="Book" ToRole="ListBookCustomerBorrow" />
+    <NavigationProperty Name="ListBookCustomerReturnBookLibraries" Relationship="Self.FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book" FromRole="Book" ToRole="ListBookCustomerReturnBookLibrary" />
+    <NavigationProperty Name="ListBookLibraryBorrowHumen" Relationship="Self.FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book" FromRole="Book" ToRole="ListBookLibraryBorrowHuman" />
+    <NavigationProperty Name="ListReturnBookHumen" Relationship="Self.FK_IdBook_ListReturnBookHuman_TO_Id_Book" FromRole="Book" ToRole="ListReturnBookHuman" />
+    <NavigationProperty Name="Language" Relationship="Self.FK_IdLanguage_Book_TO_Id_Language" FromRole="Book" ToRole="Language" />
+    <NavigationProperty Name="Publisher" Relationship="Self.FK_IdPublisher_Book_TO_Id_Publisher" FromRole="Book" ToRole="Publisher" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_IdStatus_Book_TO_Id_Status" FromRole="Book" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="BookSubject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ScoreInputSubject" Type="Int32" />
+    <Property Name="ScoreOuputSubject" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BorrowBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="DateBorrowed" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdStatus" Type="Int32" Nullable="false" />
+    <Property Name="IdFined" Type="Int32" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ContractualFine" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_IdBook_BorrowBooks_TO_Id_Book" FromRole="BorrowBooks" ToRole="Book" />
+    <NavigationProperty Name="Fined" Relationship="Self.FK_IdFined_BorrowBooks_TO_Id_Fined" FromRole="BorrowBooks" ToRole="Fined" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_BorrowBooks_TO_Id_Human" FromRole="BorrowBooks" ToRole="Human" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_IdStatus_BorrowBooks_TO_Id_Status" FromRole="BorrowBooks" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="Fined">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BorrowBooks" Relationship="Self.FK_IdFined_BorrowBooks_TO_Id_Fined" FromRole="Fined" ToRole="BorrowBooks" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Humen" Relationship="Self.FK_IdGender_Human_TO_Id_Gender" FromRole="Gender" ToRole="Human" />
+  </EntityType>
+  <EntityType Name="HistoryCreateTimeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUserStaff" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserStaff" Relationship="Self.FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff" FromRole="HistoryCreateTimeTable" ToRole="UserStaff" />
+  </EntityType>
+  <EntityType Name="Human">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdGender" Type="Int32" Nullable="false" />
+    <Property Name="IdAuthorityHuman" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UrlAvatarHuman" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Forfeit" Type="Double" />
+    <Property Name="PayFine" Type="Double" />
+    <Property Name="Compensation" Type="Double" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="AuthorityHuman" Relationship="Self.FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman" FromRole="Human" ToRole="AuthorityHuman" />
+    <NavigationProperty Name="BillBookOfCustomers" Relationship="Self.FK_IdHuman_BillBookOfCustomer_TO_Id_Human" FromRole="Human" ToRole="BillBookOfCustomer" />
+    <NavigationProperty Name="BillBookOfHumen" Relationship="Self.FK_IdHuman_BillBookOfHuman_TO_Id_Human" FromRole="Human" ToRole="BillBookOfHuman" />
+    <NavigationProperty Name="BillCustomerReturnBookLibraries" Relationship="Self.FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human" FromRole="Human" ToRole="BillCustomerReturnBookLibrary" />
+    <NavigationProperty Name="BillReturnBookHumen" Relationship="Self.FK_IdHuman_BillReturnBookHuman_TO_Id_Human" FromRole="Human" ToRole="BillReturnBookHuman" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_BorrowingIdHuman_Book_TO_Id_Human" FromRole="Human" ToRole="Book" />
+    <NavigationProperty Name="BorrowBooks" Relationship="Self.FK_IdHuman_BorrowBooks_TO_Id_Human" FromRole="Human" ToRole="BorrowBooks" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK_IdGender_Human_TO_Id_Gender" FromRole="Human" ToRole="Gender" />
+    <NavigationProperty Name="UserHumen" Relationship="Self.FK_IdHuman_UserHuman_TO_Id_Human" FromRole="Human" ToRole="UserHuman" />
+    <NavigationProperty Name="UserStaffs" Relationship="Self.FK_IdHuman_UserStaff_TO_Id_Human" FromRole="Human" ToRole="UserStaff" />
+    <NavigationProperty Name="TimeTables" Relationship="Self.FK_IdHumanFriday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables1" Relationship="Self.FK_IdHumanMonday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables2" Relationship="Self.FK_IdHumanSaturday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables3" Relationship="Self.FK_IdHumanSunday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables4" Relationship="Self.FK_IdHumanThursday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables5" Relationship="Self.FK_IdHumanTuesday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+    <NavigationProperty Name="TimeTables6" Relationship="Self.FK_IdHumanWednesday_TimeTable_TO_Id_Human" FromRole="Human" ToRole="TimeTable" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_IdLanguage_Book_TO_Id_Language" FromRole="Language" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="LibraryRegulation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LibraryTimeToBorrowBooks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TimeCustomersBorrowBooks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListBookCustomerBorrow">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBillBookOfCustomer" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfBooks" Type="Int32" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BillBookOfCustomer" Relationship="Self.FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer" FromRole="ListBookCustomerBorrow" ToRole="BillBookOfCustomer" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_IdBook_ListBookCustomerBorrow_TO_Id_Book" FromRole="ListBookCustomerBorrow" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="ListBookCustomerReturnBookLibrary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBillCustomerReturnBookLibrary" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfBooks" Type="Int32" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BillCustomerReturnBookLibrary" Relationship="Self.FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary" FromRole="ListBookCustomerReturnBookLibrary" ToRole="BillCustomerReturnBookLibrary" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book" FromRole="ListBookCustomerReturnBookLibrary" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="ListBookLibraryBorrowHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBillBookOfHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfBooks" Type="Int32" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BillBookOfHuman" Relationship="Self.FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman" FromRole="ListBookLibraryBorrowHuman" ToRole="BillBookOfHuman" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book" FromRole="ListBookLibraryBorrowHuman" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="ListDetleImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrlImageDelete" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListReturnBookHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBillReturnBookHuman" Type="Int32" Nullable="false" />
+    <Property Name="IdBook" Type="Int32" Nullable="false" />
+    <Property Name="NumberOfBooks" Type="Int32" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BillReturnBookHuman" Relationship="Self.FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman" FromRole="ListReturnBookHuman" ToRole="BillReturnBookHuman" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_IdBook_ListReturnBookHuman_TO_Id_Book" FromRole="ListReturnBookHuman" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_IdPublisher_Book_TO_Id_Publisher" FromRole="Publisher" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="SoftwareFilePath">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FilePathName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_IdStatus_Book_TO_Id_Status" FromRole="Status" ToRole="Book" />
+    <NavigationProperty Name="BorrowBooks" Relationship="Self.FK_IdStatus_BorrowBooks_TO_Id_Status" FromRole="Status" ToRole="BorrowBooks" />
+  </EntityType>
+  <EntityType Name="StatusBill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="BillBookOfCustomers" Relationship="Self.FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill" FromRole="StatusBill" ToRole="BillBookOfCustomer" />
+    <NavigationProperty Name="BillBookOfHumen" Relationship="Self.FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill" FromRole="StatusBill" ToRole="BillBookOfHuman" />
+    <NavigationProperty Name="BillCustomerReturnBookLibraries" Relationship="Self.FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill" FromRole="StatusBill" ToRole="BillCustomerReturnBookLibrary" />
+    <NavigationProperty Name="BillReturnBookHumen" Relationship="Self.FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill" FromRole="StatusBill" ToRole="BillReturnBookHuman" />
+  </EntityType>
+  <EntityType Name="StatusChangePass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="UserHumen" Relationship="Self.FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass" FromRole="StatusChangePass" ToRole="UserHuman" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TimeLine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeStart" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="TimeTables" Relationship="Self.FK_IdTimeLine_TimeTable_TO_Id_TimeLine" FromRole="TimeLine" ToRole="TimeTable" />
+  </EntityType>
+  <EntityType Name="TimeTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTimeLine" Type="Int32" Nullable="false" />
+    <Property Name="IdAuthorityStaff" Type="Int32" Nullable="false" />
+    <Property Name="IdHumanSunday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanSundayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanMonday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanMondayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanTuesday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanTuesdayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanWednesday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanWednesdayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanThursday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanThursdayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanFriday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanFridayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdHumanSaturday" Type="Int32" Nullable="false" />
+    <Property Name="CheckIdHumanSaturdayWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <Property Name="InnitiatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AuthorityStaff" Relationship="Self.FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff" FromRole="TimeTable" ToRole="AuthorityStaff" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHumanFriday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human1" Relationship="Self.FK_IdHumanMonday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human2" Relationship="Self.FK_IdHumanSaturday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human3" Relationship="Self.FK_IdHumanSunday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human4" Relationship="Self.FK_IdHumanThursday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human5" Relationship="Self.FK_IdHumanTuesday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="Human6" Relationship="Self.FK_IdHumanWednesday_TimeTable_TO_Id_Human" FromRole="TimeTable" ToRole="Human" />
+    <NavigationProperty Name="TimeLine" Relationship="Self.FK_IdTimeLine_TimeTable_TO_Id_TimeLine" FromRole="TimeTable" ToRole="TimeLine" />
+  </EntityType>
+  <EntityType Name="UserHuman">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DateInitPass" Type="DateTime" Precision="3" />
+    <Property Name="IdStatusChangePass" Type="Int32" Nullable="false" />
+    <Property Name="DatePasswordChange" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_UserHuman_TO_Id_Human" FromRole="UserHuman" ToRole="Human" />
+    <NavigationProperty Name="StatusChangePass" Relationship="Self.FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass" FromRole="UserHuman" ToRole="StatusChangePass" />
+  </EntityType>
+  <EntityType Name="UserStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdHuman" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdAuthorityStaff" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ScoreInputBook" Type="Int32" />
+    <Property Name="ScoreOuputBook" Type="Int32" />
+    <Property Name="CountDelete" Type="Int32" />
+    <NavigationProperty Name="AuthorityStaff" Relationship="Self.FK_IdAuthorityStaff_Users_TO_Id_Authority" FromRole="UserStaff" ToRole="AuthorityStaff" />
+    <NavigationProperty Name="BillBookOfCustomers" Relationship="Self.FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff" FromRole="UserStaff" ToRole="BillBookOfCustomer" />
+    <NavigationProperty Name="BillBookOfHumen" Relationship="Self.FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff" FromRole="UserStaff" ToRole="BillBookOfHuman" />
+    <NavigationProperty Name="BillCustomerReturnBookLibraries" Relationship="Self.FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff" FromRole="UserStaff" ToRole="BillCustomerReturnBookLibrary" />
+    <NavigationProperty Name="BillReturnBookHumen" Relationship="Self.FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff" FromRole="UserStaff" ToRole="BillReturnBookHuman" />
+    <NavigationProperty Name="HistoryCreateTimeTables" Relationship="Self.FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff" FromRole="UserStaff" ToRole="HistoryCreateTimeTable" />
+    <NavigationProperty Name="Human" Relationship="Self.FK_IdHuman_UserStaff_TO_Id_Human" FromRole="UserStaff" ToRole="Human" />
+  </EntityType>
+  <EntityType Name="BookAvailable_vi">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="BorrowingIdHuman" />
+      <PropertyRef Name="BookSubject" />
+      <PropertyRef Name="Author" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="Publisher" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="UrlImageBook" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BorrowingIdHuman" Type="Int32" Nullable="false" />
+    <Property Name="BookSubject" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Language" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publisher" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UrlImageBook" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BookBorrowed_vi">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="BorrowingIdHuman" />
+      <PropertyRef Name="BookSubject" />
+      <PropertyRef Name="Author" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="Publisher" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="UrlImageBook" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BorrowingIdHuman" Type="Int32" Nullable="false" />
+    <Property Name="BookSubject" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Language" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publisher" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UrlImageBook" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BookLiquidation_vi">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="BorrowingIdHuman" />
+      <PropertyRef Name="BookSubject" />
+      <PropertyRef Name="Author" />
+      <PropertyRef Name="Language" />
+      <PropertyRef Name="Publisher" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="UrlImageBook" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BorrowingIdHuman" Type="Int32" Nullable="false" />
+    <Property Name="BookSubject" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Language" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publisher" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UrlImageBook" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BorrowBooks_vi">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Human" />
+      <PropertyRef Name="Book" />
+      <PropertyRef Name="DateBorrowed" />
+      <PropertyRef Name="DueDate" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="Fine" />
+      <PropertyRef Name="ContractualFine" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Human" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Book" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBorrowed" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fine" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ContractualFine" Type="Double" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Human_vi">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="MS" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="DateOfBirth" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Authority" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="Phone" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Avatar" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="MS" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DisplayName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Authority" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Avatar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Forfeit" Type="Double" />
+    <Property Name="PayFine" Type="Double" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman">
+    <End Role="AuthorityHuman" Type="Self.AuthorityHuman" Multiplicity="1" />
+    <End Role="Human" Type="Self.Human" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorityHuman">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Human">
+        <PropertyRef Name="IdAuthorityHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff">
+    <End Role="AuthorityStaff" Type="Self.AuthorityStaff" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorityStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdAuthorityStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdAuthorityStaff_Users_TO_Id_Authority">
+    <End Role="AuthorityStaff" Type="Self.AuthorityStaff" Multiplicity="1" />
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuthorityStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserStaff">
+        <PropertyRef Name="IdAuthorityStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer">
+    <End Role="BillBookOfCustomer" Type="Self.BillBookOfCustomer" Multiplicity="1" />
+    <End Role="ListBookCustomerBorrow" Type="Self.ListBookCustomerBorrow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillBookOfCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookCustomerBorrow">
+        <PropertyRef Name="IdBillBookOfCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_BillBookOfCustomer_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="BillBookOfCustomer" Type="Self.BillBookOfCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfCustomer">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff">
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="1" />
+    <End Role="BillBookOfCustomer" Type="Self.BillBookOfCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfCustomer">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill">
+    <End Role="StatusBill" Type="Self.StatusBill" Multiplicity="1" />
+    <End Role="BillBookOfCustomer" Type="Self.BillBookOfCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusBill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfCustomer">
+        <PropertyRef Name="IdStatusBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman">
+    <End Role="BillBookOfHuman" Type="Self.BillBookOfHuman" Multiplicity="1" />
+    <End Role="ListBookLibraryBorrowHuman" Type="Self.ListBookLibraryBorrowHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillBookOfHuman">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookLibraryBorrowHuman">
+        <PropertyRef Name="IdBillBookOfHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_BillBookOfHuman_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="BillBookOfHuman" Type="Self.BillBookOfHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfHuman">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff">
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="1" />
+    <End Role="BillBookOfHuman" Type="Self.BillBookOfHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfHuman">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill">
+    <End Role="StatusBill" Type="Self.StatusBill" Multiplicity="1" />
+    <End Role="BillBookOfHuman" Type="Self.BillBookOfHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusBill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillBookOfHuman">
+        <PropertyRef Name="IdStatusBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary">
+    <End Role="BillCustomerReturnBookLibrary" Type="Self.BillCustomerReturnBookLibrary" Multiplicity="1" />
+    <End Role="ListBookCustomerReturnBookLibrary" Type="Self.ListBookCustomerReturnBookLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillCustomerReturnBookLibrary">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookCustomerReturnBookLibrary">
+        <PropertyRef Name="IdBillCustomerReturnBookLibrary" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="BillCustomerReturnBookLibrary" Type="Self.BillCustomerReturnBookLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillCustomerReturnBookLibrary">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff">
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="1" />
+    <End Role="BillCustomerReturnBookLibrary" Type="Self.BillCustomerReturnBookLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillCustomerReturnBookLibrary">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill">
+    <End Role="StatusBill" Type="Self.StatusBill" Multiplicity="1" />
+    <End Role="BillCustomerReturnBookLibrary" Type="Self.BillCustomerReturnBookLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusBill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillCustomerReturnBookLibrary">
+        <PropertyRef Name="IdStatusBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman">
+    <End Role="BillReturnBookHuman" Type="Self.BillReturnBookHuman" Multiplicity="1" />
+    <End Role="ListReturnBookHuman" Type="Self.ListReturnBookHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillReturnBookHuman">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListReturnBookHuman">
+        <PropertyRef Name="IdBillReturnBookHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_BillReturnBookHuman_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="BillReturnBookHuman" Type="Self.BillReturnBookHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillReturnBookHuman">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff">
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="1" />
+    <End Role="BillReturnBookHuman" Type="Self.BillReturnBookHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillReturnBookHuman">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill">
+    <End Role="StatusBill" Type="Self.StatusBill" Multiplicity="1" />
+    <End Role="BillReturnBookHuman" Type="Self.BillReturnBookHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusBill">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BillReturnBookHuman">
+        <PropertyRef Name="IdStatusBill" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BorrowingIdHuman_Book_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="BorrowingIdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBook_BorrowBooks_TO_Id_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="BorrowBooks" Type="Self.BorrowBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BorrowBooks">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBook_ListBookCustomerBorrow_TO_Id_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="ListBookCustomerBorrow" Type="Self.ListBookCustomerBorrow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookCustomerBorrow">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="ListBookCustomerReturnBookLibrary" Type="Self.ListBookCustomerReturnBookLibrary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookCustomerReturnBookLibrary">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="ListBookLibraryBorrowHuman" Type="Self.ListBookLibraryBorrowHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListBookLibraryBorrowHuman">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdBook_ListReturnBookHuman_TO_Id_Book">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="ListReturnBookHuman" Type="Self.ListReturnBookHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListReturnBookHuman">
+        <PropertyRef Name="IdBook" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdLanguage_Book_TO_Id_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="IdLanguage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdPublisher_Book_TO_Id_Publisher">
+    <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="IdPublisher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatus_Book_TO_Id_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="IdStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdFined_BorrowBooks_TO_Id_Fined">
+    <End Role="Fined" Type="Self.Fined" Multiplicity="1" />
+    <End Role="BorrowBooks" Type="Self.BorrowBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fined">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BorrowBooks">
+        <PropertyRef Name="IdFined" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_BorrowBooks_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="BorrowBooks" Type="Self.BorrowBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BorrowBooks">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatus_BorrowBooks_TO_Id_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="BorrowBooks" Type="Self.BorrowBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BorrowBooks">
+        <PropertyRef Name="IdStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdGender_Human_TO_Id_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Human" Type="Self.Human" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Human">
+        <PropertyRef Name="IdGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff">
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="1" />
+    <End Role="HistoryCreateTimeTable" Type="Self.HistoryCreateTimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HistoryCreateTimeTable">
+        <PropertyRef Name="IdUserStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_UserHuman_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="UserHuman" Type="Self.UserHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserHuman">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHuman_UserStaff_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="UserStaff" Type="Self.UserStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserStaff">
+        <PropertyRef Name="IdHuman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanFriday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanFriday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanMonday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanMonday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanSaturday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanSaturday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanSunday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanSunday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanThursday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanThursday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanTuesday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanTuesday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdHumanWednesday_TimeTable_TO_Id_Human">
+    <End Role="Human" Type="Self.Human" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdHumanWednesday" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass">
+    <End Role="StatusChangePass" Type="Self.StatusChangePass" Multiplicity="1" />
+    <End Role="UserHuman" Type="Self.UserHuman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusChangePass">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserHuman">
+        <PropertyRef Name="IdStatusChangePass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IdTimeLine_TimeTable_TO_Id_TimeLine">
+    <End Role="TimeLine" Type="Self.TimeLine" Multiplicity="1" />
+    <End Role="TimeTable" Type="Self.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimeLine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="IdTimeLine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Library_ManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="AuthorityHumen" EntityType="Self.AuthorityHuman" />
+    <EntitySet Name="AuthorityStaffs" EntityType="Self.AuthorityStaff" />
+    <EntitySet Name="BillBookOfCustomers" EntityType="Self.BillBookOfCustomer" />
+    <EntitySet Name="BillBookOfHumen" EntityType="Self.BillBookOfHuman" />
+    <EntitySet Name="BillCustomerReturnBookLibraries" EntityType="Self.BillCustomerReturnBookLibrary" />
+    <EntitySet Name="BillReturnBookHumen" EntityType="Self.BillReturnBookHuman" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="BookSubjects" EntityType="Self.BookSubject" />
+    <EntitySet Name="BorrowBooks" EntityType="Self.BorrowBook" />
+    <EntitySet Name="Fineds" EntityType="Self.Fined" />
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="HistoryCreateTimeTables" EntityType="Self.HistoryCreateTimeTable" />
+    <EntitySet Name="Humen" EntityType="Self.Human" />
+    <EntitySet Name="Languages" EntityType="Self.Language" />
+    <EntitySet Name="LibraryRegulations" EntityType="Self.LibraryRegulation" />
+    <EntitySet Name="ListBookCustomerBorrows" EntityType="Self.ListBookCustomerBorrow" />
+    <EntitySet Name="ListBookCustomerReturnBookLibraries" EntityType="Self.ListBookCustomerReturnBookLibrary" />
+    <EntitySet Name="ListBookLibraryBorrowHumen" EntityType="Self.ListBookLibraryBorrowHuman" />
+    <EntitySet Name="ListDetleImages" EntityType="Self.ListDetleImage" />
+    <EntitySet Name="ListReturnBookHumen" EntityType="Self.ListReturnBookHuman" />
+    <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+    <EntitySet Name="SoftwareFilePaths" EntityType="Self.SoftwareFilePath" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="StatusBills" EntityType="Self.StatusBill" />
+    <EntitySet Name="StatusChangePasses" EntityType="Self.StatusChangePass" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TimeLines" EntityType="Self.TimeLine" />
+    <EntitySet Name="TimeTables" EntityType="Self.TimeTable" />
+    <EntitySet Name="UserHumen" EntityType="Self.UserHuman" />
+    <EntitySet Name="UserStaffs" EntityType="Self.UserStaff" />
+    <EntitySet Name="BookAvailable_vi" EntityType="Self.BookAvailable_vi" />
+    <EntitySet Name="BookBorrowed_vi" EntityType="Self.BookBorrowed_vi" />
+    <EntitySet Name="BookLiquidation_vi" EntityType="Self.BookLiquidation_vi" />
+    <EntitySet Name="BorrowBooks_vi" EntityType="Self.BorrowBooks_vi" />
+    <EntitySet Name="Human_vi" EntityType="Self.Human_vi" />
+    <AssociationSet Name="FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman" Association="Self.FK_IdAuthorityHuman_Human_TO_Id_AuthorityHuman">
+      <End Role="AuthorityHuman" EntitySet="AuthorityHumen" />
+      <End Role="Human" EntitySet="Humen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff" Association="Self.FK_IdAuthorityStaff_TimeTable_TO_Id_AuthorityStaff">
+      <End Role="AuthorityStaff" EntitySet="AuthorityStaffs" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdAuthorityStaff_Users_TO_Id_Authority" Association="Self.FK_IdAuthorityStaff_Users_TO_Id_Authority">
+      <End Role="AuthorityStaff" EntitySet="AuthorityStaffs" />
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer" Association="Self.FK_IdBillBookOfCustomer_ListBookCustomerBorrow_TO_Id_BillBookOfCustomer">
+      <End Role="BillBookOfCustomer" EntitySet="BillBookOfCustomers" />
+      <End Role="ListBookCustomerBorrow" EntitySet="ListBookCustomerBorrows" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_BillBookOfCustomer_TO_Id_Human" Association="Self.FK_IdHuman_BillBookOfCustomer_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="BillBookOfCustomer" EntitySet="BillBookOfCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff" Association="Self.FK_IdStaff_BillBookOfCustomer_TO_Id_UserStaff">
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+      <End Role="BillBookOfCustomer" EntitySet="BillBookOfCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill" Association="Self.FK_IdStatusBill_BillBookOfCustomer_TO_Id_StatusBill">
+      <End Role="StatusBill" EntitySet="StatusBills" />
+      <End Role="BillBookOfCustomer" EntitySet="BillBookOfCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman" Association="Self.FK_IdBillBookOfHuman_ListBookLibraryBorrowHuman_TO_IdBillBookOfHuman_ListBookLibraryBorrowHuman">
+      <End Role="BillBookOfHuman" EntitySet="BillBookOfHumen" />
+      <End Role="ListBookLibraryBorrowHuman" EntitySet="ListBookLibraryBorrowHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_BillBookOfHuman_TO_Id_Human" Association="Self.FK_IdHuman_BillBookOfHuman_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="BillBookOfHuman" EntitySet="BillBookOfHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff" Association="Self.FK_IdStaff_BillBookOfHuman_TO_Id_UserStaff">
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+      <End Role="BillBookOfHuman" EntitySet="BillBookOfHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill" Association="Self.FK_IdStatusBill_BillBookOfHuman_TO_Id_StatusBill">
+      <End Role="StatusBill" EntitySet="StatusBills" />
+      <End Role="BillBookOfHuman" EntitySet="BillBookOfHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary" Association="Self.FK_IdBillCustomerReturnBookLibrary_ListBookCustomerReturnBookLibrary_TO_Id_BillCustomerReturnBookLibrary">
+      <End Role="BillCustomerReturnBookLibrary" EntitySet="BillCustomerReturnBookLibraries" />
+      <End Role="ListBookCustomerReturnBookLibrary" EntitySet="ListBookCustomerReturnBookLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human" Association="Self.FK_IdHuman_BillCustomerReturnBookLibrary_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="BillCustomerReturnBookLibrary" EntitySet="BillCustomerReturnBookLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff" Association="Self.FK_IdStaff_BillCustomerReturnBookLibrary_TO_Id_UserStaff">
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+      <End Role="BillCustomerReturnBookLibrary" EntitySet="BillCustomerReturnBookLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill" Association="Self.FK_IdStatusBill_BillCustomerReturnBookLibrary_TO_Id_StatusBill">
+      <End Role="StatusBill" EntitySet="StatusBills" />
+      <End Role="BillCustomerReturnBookLibrary" EntitySet="BillCustomerReturnBookLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman" Association="Self.FK_IdBillReturnBookHuman_ListReturnBookHuman_TO_Id_BillReturnBookHuman">
+      <End Role="BillReturnBookHuman" EntitySet="BillReturnBookHumen" />
+      <End Role="ListReturnBookHuman" EntitySet="ListReturnBookHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_BillReturnBookHuman_TO_Id_Human" Association="Self.FK_IdHuman_BillReturnBookHuman_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="BillReturnBookHuman" EntitySet="BillReturnBookHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff" Association="Self.FK_IdStaff_BillReturnBookHuman_TO_Id_UserStaff">
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+      <End Role="BillReturnBookHuman" EntitySet="BillReturnBookHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill" Association="Self.FK_IdStatusBill_BillReturnBookHuman_TO_Id_StatusBill">
+      <End Role="StatusBill" EntitySet="StatusBills" />
+      <End Role="BillReturnBookHuman" EntitySet="BillReturnBookHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BorrowingIdHuman_Book_TO_Id_Human" Association="Self.FK_BorrowingIdHuman_Book_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBook_BorrowBooks_TO_Id_Book" Association="Self.FK_IdBook_BorrowBooks_TO_Id_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="BorrowBooks" EntitySet="BorrowBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBook_ListBookCustomerBorrow_TO_Id_Book" Association="Self.FK_IdBook_ListBookCustomerBorrow_TO_Id_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="ListBookCustomerBorrow" EntitySet="ListBookCustomerBorrows" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book" Association="Self.FK_IdBook_ListBookCustomerReturnBookLibrary_TO_Id_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="ListBookCustomerReturnBookLibrary" EntitySet="ListBookCustomerReturnBookLibraries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book" Association="Self.FK_IdBook_ListBookLibraryBorrowHuman_TO_Id_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="ListBookLibraryBorrowHuman" EntitySet="ListBookLibraryBorrowHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdBook_ListReturnBookHuman_TO_Id_Book" Association="Self.FK_IdBook_ListReturnBookHuman_TO_Id_Book">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="ListReturnBookHuman" EntitySet="ListReturnBookHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdLanguage_Book_TO_Id_Language" Association="Self.FK_IdLanguage_Book_TO_Id_Language">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdPublisher_Book_TO_Id_Publisher" Association="Self.FK_IdPublisher_Book_TO_Id_Publisher">
+      <End Role="Publisher" EntitySet="Publishers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatus_Book_TO_Id_Status" Association="Self.FK_IdStatus_Book_TO_Id_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdFined_BorrowBooks_TO_Id_Fined" Association="Self.FK_IdFined_BorrowBooks_TO_Id_Fined">
+      <End Role="Fined" EntitySet="Fineds" />
+      <End Role="BorrowBooks" EntitySet="BorrowBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_BorrowBooks_TO_Id_Human" Association="Self.FK_IdHuman_BorrowBooks_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="BorrowBooks" EntitySet="BorrowBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatus_BorrowBooks_TO_Id_Status" Association="Self.FK_IdStatus_BorrowBooks_TO_Id_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="BorrowBooks" EntitySet="BorrowBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdGender_Human_TO_Id_Gender" Association="Self.FK_IdGender_Human_TO_Id_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Human" EntitySet="Humen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff" Association="Self.FK_IdUserStaff_HistoryCreateTimeTable_TO_Id_UserStaff">
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+      <End Role="HistoryCreateTimeTable" EntitySet="HistoryCreateTimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_UserHuman_TO_Id_Human" Association="Self.FK_IdHuman_UserHuman_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="UserHuman" EntitySet="UserHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHuman_UserStaff_TO_Id_Human" Association="Self.FK_IdHuman_UserStaff_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="UserStaff" EntitySet="UserStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanFriday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanFriday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanMonday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanMonday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanSaturday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanSaturday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanSunday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanSunday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanThursday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanThursday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanTuesday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanTuesday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdHumanWednesday_TimeTable_TO_Id_Human" Association="Self.FK_IdHumanWednesday_TimeTable_TO_Id_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass" Association="Self.FK_IdStatusChangePass_UserHuman_TO_Id_StatusChangePass">
+      <End Role="StatusChangePass" EntitySet="StatusChangePasses" />
+      <End Role="UserHuman" EntitySet="UserHumen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IdTimeLine_TimeTable_TO_Id_TimeLine" Association="Self.FK_IdTimeLine_TimeTable_TO_Id_TimeLine">
+      <End Role="TimeLine" EntitySet="TimeLines" />
+      <End Role="TimeTable" EntitySet="TimeTables" />
+    </AssociationSet>
+    <FunctionImport Name="load_data_Author" IsComposable="true" ReturnType="Collection(Library_ManagementModel.load_data_Author_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="load_data_BookSubject" IsComposable="true" ReturnType="Collection(Library_ManagementModel.load_data_BookSubject_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Author">
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BillBookOfCustomer">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="BorrowedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="CashReceived" Mode="In" Type="Double" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BillBookOfHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="BorrowedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BillCustomerReturnBookLibrary">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="AllTheDepositAmount" Mode="In" Type="Double" />
+      <Parameter Name="CashReceived" Mode="In" Type="Double" />
+      <Parameter Name="CustomerFined" Mode="In" Type="Double" />
+      <Parameter Name="AllFines" Mode="In" Type="Double" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BillReturnBookHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="LibraryFined" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Book">
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="BookPrice" Mode="In" Type="Double" />
+      <Parameter Name="BorrowingIdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="BookSubject" Mode="In" Type="String" />
+      <Parameter Name="Author" Mode="In" Type="String" />
+      <Parameter Name="IdLanguage" Mode="In" Type="Int32" />
+      <Parameter Name="IdPublisher" Mode="In" Type="Int32" />
+      <Parameter Name="IdStatus" Mode="In" Type="Int32" />
+      <Parameter Name="IdStatusReturnBookToHuman" Mode="In" Type="Int32" />
+      <Parameter Name="LibraryDateBorrowed" Mode="In" Type="DateTime" />
+      <Parameter Name="LibraryDueDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Color" Mode="In" Type="String" />
+      <Parameter Name="DateReturnBookToHuman" Mode="In" Type="DateTime" />
+      <Parameter Name="UrlImageBook" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BookSubject">
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="ScoreInputSubject" Mode="In" Type="Int32" />
+      <Parameter Name="ScoreOuputSubject" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_BorrowBooks">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdBook" Mode="In" Type="Int32" />
+      <Parameter Name="DateBorrowed" Mode="In" Type="DateTime" />
+      <Parameter Name="DueDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatus" Mode="In" Type="Int32" />
+      <Parameter Name="IdFined" Mode="In" Type="Int32" />
+      <Parameter Name="Color" Mode="In" Type="String" />
+      <Parameter Name="ContractualFine" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_HistoryCreateTimeTable">
+      <Parameter Name="IdUserStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="DateCreate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Human">
+      <Parameter Name="MS" Mode="In" Type="String" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+      <Parameter Name="IdGender" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="UrlAvatarHuman" Mode="In" Type="String" />
+      <Parameter Name="Forfeit" Mode="In" Type="Double" />
+      <Parameter Name="PayFine" Mode="In" Type="Double" />
+      <Parameter Name="Compensation" Mode="In" Type="Double" />
+      <Parameter Name="Score" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Language">
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_Publisher">
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="Score" Mode="In" Type="Double" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_TimeTable">
+      <Parameter Name="IdTimeLine" Mode="In" Type="Int32" />
+      <Parameter Name="IdAuthorityStaff" Mode="In" Type="Int32" />
+      <Parameter Name="IdHumanSunday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanSundayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanMonday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanMondayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanTuesday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanTuesdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanWednesday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanWednesdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanThursday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanThursdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanFriday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanFridayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanSaturday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanSaturdayWork" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+      <Parameter Name="InnitiatedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Add_UserHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="DateInitPass" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatusChangePass" Mode="In" Type="Int32" />
+      <Parameter Name="DatePasswordChange" Mode="In" Type="DateTime" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Add_UserStaff">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="ScoreInputBook" Mode="In" Type="Int32" />
+      <Parameter Name="ScoreOuputBook" Mode="In" Type="Int32" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="load_data_AuthorityHuman" ReturnType="Collection(Library_ManagementModel.load_data_AuthorityHuman_Result)" />
+    <FunctionImport Name="load_data_AuthorityStaff" ReturnType="Collection(Library_ManagementModel.load_data_AuthorityStaff_Result)" />
+    <FunctionImport Name="load_data_BillBookOfCustomer" ReturnType="Collection(Library_ManagementModel.load_data_BillBookOfCustomer_Result)" />
+    <FunctionImport Name="load_data_BillBookOfHuman" ReturnType="Collection(Library_ManagementModel.load_data_BillBookOfHuman_Result)" />
+    <FunctionImport Name="load_data_BillCustomerReturnBook" />
+    <FunctionImport Name="load_data_BillReturnBookHuman" ReturnType="Collection(Library_ManagementModel.load_data_BillReturnBookHuman_Result)" />
+    <FunctionImport Name="load_data_Book" ReturnType="Collection(Library_ManagementModel.load_data_Book_Result)" />
+    <FunctionImport Name="load_data_BorrowBook" />
+    <FunctionImport Name="load_data_HistoryCreateTimeTable" ReturnType="Collection(Library_ManagementModel.load_data_HistoryCreateTimeTable_Result)" />
+    <FunctionImport Name="load_data_Human" ReturnType="Collection(Library_ManagementModel.load_data_Human_Result)" />
+    <FunctionImport Name="load_data_ListBookCustomerBorrow" ReturnType="Collection(Library_ManagementModel.load_data_ListBookCustomerBorrow_Result)" />
+    <FunctionImport Name="load_data_ListBookCustomerReturnBookLibrary" ReturnType="Collection(Library_ManagementModel.load_data_ListBookCustomerReturnBookLibrary_Result)" />
+    <FunctionImport Name="load_data_ListBookLibraryBorrow" />
+    <FunctionImport Name="load_data_ListReturnBookHuman" ReturnType="Collection(Library_ManagementModel.load_data_ListReturnBookHuman_Result)" />
+    <FunctionImport Name="load_data_Publishher" />
+    <FunctionImport Name="load_data_Status" ReturnType="Collection(Library_ManagementModel.load_data_Status_Result)" />
+    <FunctionImport Name="load_data_TimeTable" ReturnType="Collection(Library_ManagementModel.load_data_TimeTable_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Library_ManagementModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Library_ManagementModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="Update_Author">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BillBookOfCustomer">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="BorrowedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="CashReceived" Mode="In" Type="Double" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BillBookOfHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="BorrowedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BillCustomerReturnBookLibrary">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="AllTheDepositAmount" Mode="In" Type="Double" />
+      <Parameter Name="CashReceived" Mode="In" Type="Double" />
+      <Parameter Name="CustomerFined" Mode="In" Type="Double" />
+      <Parameter Name="AllFines" Mode="In" Type="Double" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BillReturnBookHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DateOfRepayment" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatusBill" Mode="In" Type="Int32" />
+      <Parameter Name="LibraryFined" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Book">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="BookPrice" Mode="In" Type="Double" />
+      <Parameter Name="BorrowingIdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="BookSubject" Mode="In" Type="String" />
+      <Parameter Name="Author" Mode="In" Type="String" />
+      <Parameter Name="IdLanguage" Mode="In" Type="Int32" />
+      <Parameter Name="IdPublisher" Mode="In" Type="Int32" />
+      <Parameter Name="IdStatus" Mode="In" Type="Int32" />
+      <Parameter Name="IdStatusReturnBookToHuman" Mode="In" Type="Int32" />
+      <Parameter Name="LibraryDateBorrowed" Mode="In" Type="DateTime" />
+      <Parameter Name="LibraryDueDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Color" Mode="In" Type="String" />
+      <Parameter Name="DateReturnBookToHuman" Mode="In" Type="DateTime" />
+      <Parameter Name="UrlImageBook" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BookSubject">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="ScoreInputSubject" Mode="In" Type="Int32" />
+      <Parameter Name="ScoreOuputSubject" Mode="In" Type="Int32" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_BorrowBooks">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="IdBook" Mode="In" Type="Int32" />
+      <Parameter Name="DateBorrowed" Mode="In" Type="DateTime" />
+      <Parameter Name="DueDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatus" Mode="In" Type="Int32" />
+      <Parameter Name="IdFined" Mode="In" Type="Int32" />
+      <Parameter Name="Color" Mode="In" Type="String" />
+      <Parameter Name="ContractualFine" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_HistoryCreateTimeTable">
+      <Parameter Name="IdUserStaff" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="DateCreate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Human">
+      <Parameter Name="MS" Mode="In" Type="String" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+      <Parameter Name="IdGender" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="UrlAvatarHuman" Mode="In" Type="String" />
+      <Parameter Name="Forfeit" Mode="In" Type="Double" />
+      <Parameter Name="PayFine" Mode="In" Type="Double" />
+      <Parameter Name="Compensation" Mode="In" Type="Double" />
+      <Parameter Name="Score" Mode="In" Type="Double" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Language">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Publisher">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="DisplayName" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="Score" Mode="In" Type="Double" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_TimeTable">
+      <Parameter Name="IdTimeLine" Mode="In" Type="Int32" />
+      <Parameter Name="IdAuthorityStaff" Mode="In" Type="Int32" />
+      <Parameter Name="IdHumanSunday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanSundayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanMonday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanMondayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanTuesday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanTuesdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanWednesday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanWednesdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanThursday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanThursdayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanFriday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanFridayWork" Mode="In" Type="String" />
+      <Parameter Name="IdHumanSaturday" Mode="In" Type="Int32" />
+      <Parameter Name="CheckIdHumanSaturdayWork" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+      <Parameter Name="InnitiatedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="Update_UserHuman">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="DateInitPass" Mode="In" Type="DateTime" />
+      <Parameter Name="IdStatusChangePass" Mode="In" Type="Int32" />
+      <Parameter Name="DatePasswordChange" Mode="In" Type="DateTime" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_UserStaff">
+      <Parameter Name="IdHuman" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Note" Mode="In" Type="String" />
+      <Parameter Name="ScoreInputBook" Mode="In" Type="Int32" />
+      <Parameter Name="ScoreOuputBook" Mode="In" Type="Int32" />
+      <Parameter Name="CountDelete" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="load_data_AuthorityHuman_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_AuthorityStaff_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_BillBookOfCustomer_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdHuman" Nullable="false" />
+    <Property Type="Int32" Name="IdStaff" Nullable="false" />
+    <Property Type="DateTime" Name="BorrowedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DateOfRepayment" Nullable="false" Precision="23" />
+    <Property Type="Double" Name="CashReceived" Nullable="true" />
+    <Property Type="Int32" Name="IdStatusBill" Nullable="false" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_BillBookOfHuman_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdHuman" Nullable="false" />
+    <Property Type="Int32" Name="IdStaff" Nullable="false" />
+    <Property Type="DateTime" Name="BorrowedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="DateOfRepayment" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="Int32" Name="IdStatusBill" Nullable="false" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_BillReturnBookHuman_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdHuman" Nullable="false" />
+    <Property Type="Int32" Name="IdStaff" Nullable="false" />
+    <Property Type="DateTime" Name="DateOfRepayment" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdStatusBill" Nullable="false" />
+    <Property Type="Double" Name="LibraryFined" Nullable="true" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_Book_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="2000" />
+    <Property Type="Double" Name="BookPrice" Nullable="true" />
+    <Property Type="Int32" Name="BorrowingIdHuman" Nullable="false" />
+    <Property Type="String" Name="BookSubject" Nullable="false" MaxLength="1000" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="1000" />
+    <Property Type="Int32" Name="IdLanguage" Nullable="false" />
+    <Property Type="Int32" Name="IdPublisher" Nullable="true" />
+    <Property Type="Int32" Name="IdStatus" Nullable="false" />
+    <Property Type="Int32" Name="IdStatusReturnBookToHuman" Nullable="false" />
+    <Property Type="DateTime" Name="LibraryDateBorrowed" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="LibraryDueDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Color" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="DateReturnBookToHuman" Nullable="false" Precision="23" />
+    <Property Type="String" Name="UrlImageBook" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_HistoryCreateTimeTable_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdUserStaff" Nullable="false" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="2000" />
+    <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="load_data_Human_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="MS" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="1000" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdGender" Nullable="false" />
+    <Property Type="Int32" Name="IdAuthorityHuman" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="1000" />
+    <Property Type="String" Name="UrlAvatarHuman" Nullable="false" MaxLength="1000" />
+    <Property Type="Double" Name="Forfeit" Nullable="true" />
+    <Property Type="Double" Name="PayFine" Nullable="true" />
+    <Property Type="Double" Name="Compensation" Nullable="true" />
+    <Property Type="Double" Name="Score" Nullable="true" />
+    <Property Type="String" Name="Note" Nullable="true" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_ListBookCustomerBorrow_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdBillBookOfCustomer" Nullable="false" />
+    <Property Type="Int32" Name="IdBook" Nullable="false" />
+    <Property Type="Int32" Name="NumberOfBooks" Nullable="false" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_ListBookCustomerReturnBookLibrary_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdBillCustomerReturnBookLibrary" Nullable="false" />
+    <Property Type="Int32" Name="IdBook" Nullable="false" />
+    <Property Type="Int32" Name="NumberOfBooks" Nullable="false" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_ListReturnBookHuman_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdBillReturnBookHuman" Nullable="false" />
+    <Property Type="Int32" Name="IdBook" Nullable="false" />
+    <Property Type="Int32" Name="NumberOfBooks" Nullable="false" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_Status_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="load_data_TimeTable_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="IdTimeLine" Nullable="false" />
+    <Property Type="Int32" Name="IdAuthorityStaff" Nullable="false" />
+    <Property Type="Int32" Name="IdHumanSunday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanSundayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanMonday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanMondayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanTuesday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanTuesdayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanWednesday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanWednesdayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanThursday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanThursdayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanFriday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanFridayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="IdHumanSaturday" Nullable="false" />
+    <Property Type="String" Name="CheckIdHumanSaturdayWork" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="CountDelete" Nullable="true" />
+    <Property Type="DateTime" Name="InnitiatedDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

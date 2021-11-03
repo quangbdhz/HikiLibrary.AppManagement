@@ -1,0 +1,151 @@
+﻿<Window x:Class="Library_Management.Staff.EditUserStaffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management.Staff"
+        Icon="/Images/Library_Icon.ico"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:Library_Management.UserControlLibrary"
+        
+        mc:Ignorable="d"
+        DataContext="{StaticResource EditUserStaffVM}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="editUserWindow"
+        
+        Title="Edit User" Height="380" Width="420">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Background="#2d3436">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUcMess Tag="{Binding Title, ElementName=editUserWindow}"></uc:ControlBarUcMess>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Edit Account" Margin="7" Foreground="#dfe6e9" TextAlignment="Center" 
+                       FontSize="40" FontFamily="Comic Sans MS"></TextBlock>
+
+            <Grid Grid.Row="1" Margin="16">
+                <materialDesign:Card Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid Width="310">
+                        <Grid.Resources>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin" Value="15 0 15 0"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Margin="5 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="15,0,0,-0.2" Grid.RowSpan="2">
+                                <materialDesign:PackIcon Kind="IdCardOutline" Height="25" Width="23" Margin="-23 14 0 0"/>
+                            </Grid>
+
+                            <ComboBox Margin="32 0 0 0" DisplayMemberPath="MS" ItemsSource="{Binding LvHuman}" IsEnabled="False" FontWeight="Bold"
+                                  SelectedItem="{Binding SelectedItemHuman, Mode=TwoWay,  UpdateSourceTrigger=PropertyChanged}" Width="273"
+                                  materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:HintAssist.Hint="Id" IsEditable="True" 
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="41"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="5 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="15,0,0,-0.2" Grid.RowSpan="2">
+                                <Image Source="/Images/Icon_Button/Authority.png" Width="26" Height="25" Stretch="Fill" Margin="-24, 3, 0, 0"/>
+                            </Grid>
+
+                            <TextBox Margin="15 0 0 0" Grid.Column="1" Text="{Binding SelectedItemHuman.DisplayName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    materialDesign:HintAssist.Hint="Họ và tên" materialDesign:HintAssist.Foreground="Black" IsEnabled="False" FontWeight="Bold"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="DarkGreen" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+
+                        <Grid Grid.Row="2" Margin="5 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon Kind="AccountCircleOutline" Height="33" Width="33" Margin="-11,7,10,0"/>
+
+                            <TextBox Grid.Column="1" Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    materialDesign:HintAssist.Hint="Tên đăng nhập" materialDesign:HintAssist.Foreground="Black"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="DarkGreen" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+
+                        <Grid Grid.Row="3" Margin="5 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" HorizontalAlignment="Left">
+                                <Image Source="/Images/Icon_Button/Username.png" Width="26" Height="25" Stretch="Fill" Margin="-24, 3, 0, 0"/>
+                            </Grid>
+
+                            <ComboBox Margin="32 0 0 0" DisplayMemberPath="DisplayName" ItemsSource="{Binding LvAuthorityStaff}" 
+                                  SelectedItem="{Binding SelectedItemAuthorityStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="273"
+                                  materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:HintAssist.Hint="Quyền" IsEditable="True" 
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" Height="41"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4" Margin="5 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon Kind="Note" Height="33" Width="33" Margin="-11,7,10,0"/>
+
+                            <TextBox Grid.Column="1" Text="{Binding Note, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    materialDesign:HintAssist.Hint="Ghi chú" materialDesign:HintAssist.Foreground="Black"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="DarkGreen" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+
+                        <Grid Grid.Row="5" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"  IsDefault="True" Command="{Binding EditCommand}" BorderBrush="Black" BorderThickness="1"
+                                    CommandParameter="{Binding ElementName=editUserWindow}" Foreground="Black"
+                                    Width="100" Background="Aqua" ToolTip="Lưu" Content="Save" FontWeight="Bold" ></Button>
+
+                            <Button Grid.Column="1" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=editUserWindow}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}" Width="100" Background="Red" Foreground="Black"
+                                    ToolTip="Thoát" Content="Exit" FontWeight="Bold" BorderBrush="Black" BorderThickness="1"></Button>
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

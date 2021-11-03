@@ -1,0 +1,214 @@
+﻿<Window x:Class="Library_Management.Human.HumanWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management.Human"
+        Icon="/Images/Library_Icon.ico"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:Library_Management.UserControlLibrary"   
+        DataContext="{StaticResource EditHumanVM}"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="humanWindow"
+        
+        mc:Ignorable="d"
+        Title="Human" Height="730" Width="1295">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <Style x:Key="StyleTextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10 12 2 0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#2d3436">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=humanWindow}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <materialDesign:Card Margin="4">
+                    <DockPanel Margin="0 2 0 2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <Button Command="{Binding AddHumanWindowCommand}" Content="Add" Margin="4 0 0 0" Width="100" ToolTip="Thêm"
+                                    Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                    <Button Command="{Binding EditHumanWindowCommand}" Content="Edit" Margin="10 0 0 0" Width="100" ToolTip="Sửa"
+                                    Background="#3ae374" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                    <Button Command="{Binding DeleteHumanCommand}" Content="Delete" Margin="10 0 10 0" Width="100" ToolTip="Xóa"
+                                    Background="#EA2027" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <WrapPanel HorizontalAlignment="Center">
+                                    <materialDesign:Card Grid.Column="1" Background="Black">
+                                        <materialDesign:ColorZone Mode="Dark" CornerRadius="2"  Panel.ZIndex="1" Margin="0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Button IsEnabled="True" Grid.Column="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".99" />
+                                                </Button>
+
+                                                <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                         Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the human"
+                                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  
+                                                         Name="tb_human" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" />
+
+                                                <Grid Grid.Column="2">
+                                                    <ComboBox SelectedIndex="0" Margin="8 3 0 0" BorderThickness="0"  Name="OptionSearch" 
+                                                         materialDesign:ColorZoneAssist.Mode="Inverted"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                                                         BorderBrush="{DynamicResource MaterialDesignPaper}">
+                                                        <ComboBoxItem>Full Name</ComboBoxItem>
+                                                        <ComboBoxItem>Authority</ComboBoxItem>
+                                                        <ComboBoxItem>Gender</ComboBoxItem>
+                                                    </ComboBox>
+                                                </Grid>
+                                            </Grid>
+                                        </materialDesign:ColorZone>
+
+                                    </materialDesign:Card>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <WrapPanel HorizontalAlignment="Right">
+                                    <TextBlock Margin="10 0 10 0" Text="Sort by" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"></TextBlock>
+
+                                    <CheckBox IsChecked="{Binding CheckName}" Command="{Binding SortNameCommand}" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Margin="0 0 10 0"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" CommandParameter="{Binding ElementName=checkName}" Name="checkName">Name</CheckBox>
+
+                                    <CheckBox IsChecked="{Binding CheckGender}" Command="{Binding SortGenderCommand}" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Margin="0 0 10 0"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" CommandParameter="{Binding ElementName=checkGender}" Name="checkGender">Gender</CheckBox>
+
+                                    <CheckBox IsChecked="{Binding CheckAuthority}" Command="{Binding SortAuthorityCommand}" Style="{StaticResource MaterialDesignFilterChipOutlineCheckBox}" Margin="0 0 10 0"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" CommandParameter="{Binding ElementName=checkAuthority}" Name="checkAuthority">Authority</CheckBox>
+                                </WrapPanel>
+                            </Grid>
+                        </Grid>
+                    </DockPanel>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="995*"/>
+                    <ColumnDefinition Width="294*"/>
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Margin="4,0,3.8,3.8" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+                    <ScrollViewer Name="ListViewScrollViewerHuman"  PreviewMouseWheel="ListViewScrollViewerHuman_PreviewMouseWheel" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ListView Name="Lv_Human" ItemsSource="{Binding LvHuman, Mode=TwoWay}" SelectedItem="{Binding SelectedItemHuman, Mode=TwoWay}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                            <Setter Property="FontFamily" Value="Segoe UI" />
+                                            <Setter Property="Margin" Value="10 0 0 0" />
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                        </Style>
+
+                                    </GridView.ColumnHeaderContainerStyle>
+
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding MS}" ></GridViewColumn>
+                                    <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                    <GridViewColumn Header="Date Of Birth" DisplayMemberBinding="{Binding DateOfBirth, StringFormat=dd/MM/yyyy}"></GridViewColumn>
+                                    <GridViewColumn Header="Authority" DisplayMemberBinding="{Binding AuthorityHuman.DisplayName}"></GridViewColumn>
+                                    <GridViewColumn Header="Gender" DisplayMemberBinding="{Binding Gender.DisplayName}"></GridViewColumn>
+                                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"></GridViewColumn>
+                                    <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
+                                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
+                                    <GridViewColumn Header="Photo">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image RenderOptions.BitmapScalingMode="Fant"  Width="150" MaxHeight="100" Source="{Binding Path=UrlAvatarHuman}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Note" DisplayMemberBinding="{Binding Note}"></GridViewColumn>
+                                    <GridViewColumn Header="Check User">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Command="{Binding ElementName=Lv_Human, Path=DataContext.CheckUserHumanCommand}" 
+                                                        CommandParameter="{Binding}" Background="Aqua" Foreground="Black" Content="Check"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Forfeit" DisplayMemberBinding="{Binding Forfeit}"></GridViewColumn>
+                                    <GridViewColumn Header="PayFine" DisplayMemberBinding="{Binding PayFine}"></GridViewColumn>
+                                    <GridViewColumn Header="Score" DisplayMemberBinding="{Binding Score}"></GridViewColumn>
+
+
+                                </GridView>
+                            </ListView.View>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding DoubleClickHumanListViewCommand}"
+                                                               CommandParameter="{Binding ElementName=Lv_Human, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseUp">
+                                    <i:InvokeCommandAction Command="{Binding MouseUpHumanListViewCommand}"
+                                                               CommandParameter="{Binding ElementName=Lv_Human, Path=SelectedItem}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                        </ListView>
+                    </ScrollViewer>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,499 @@
+﻿<Window x:Class="Library_Management.Staff.TimeTableWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management.Staff"
+        Icon="/Images/Library_Icon.ico"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:Library_Management.UserControlLibrary"
+        DataContext="{StaticResource TimeTableVM}"
+        
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Name="timeTableWindow"
+        
+        Title="Time Table" Height="730" Width="1295">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Background="#2d3436">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=timeTableWindow}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <dragablz:TabablzControl Name="texxt">
+                    <dragablz:TabablzControl.InterTabController>
+                        <dragablz:InterTabController />
+                    </dragablz:TabablzControl.InterTabController>
+
+                    <TabItem Header="Manager">
+                        <Grid Background="#2d3436">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <WrapPanel Grid.Row="0">
+                                <Button Command="{Binding AddTimeTableManager}" Content="Create Time Table Manager" Margin="4 4 0 0" Width="Auto" ToolTip="Thêm" HorizontalAlignment="Left"
+                                    Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                <Button Command="{Binding OuputManagerWordCommand}" Margin="4 4 0 0" Width="100" ToolTip="Thêm"
+                                         Padding="0" Background="#feca57" FontWeight="Bold" FontFamily="Segoe UI"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                                    <WrapPanel>
+                                        <Image Margin="-15 0 0 0" Source="/Images/Icon_Button/Word.png"></Image>
+                                        <TextBlock VerticalAlignment="Center" Text="   Word"></TextBlock>
+                                    </WrapPanel>
+                                </Button>
+
+                                <TextBlock Margin="100 0 0 0" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="White" Text="{Binding DateStartTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+                                <TextBlock Margin="15 0 0 0" FontSize="16" VerticalAlignment="Center" Foreground="White"  Text="{Binding EndDateTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </WrapPanel>
+
+                            <Grid Grid.Row="1">
+                                <materialDesign:Card Margin="4 4 4 0" Grid.Row="1" VerticalAlignment="Stretch">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                        <ListView Name="Lv_TimeTableManager" ItemsSource="{Binding LvTimeTableManager}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridView.ColumnHeaderContainerStyle>
+                                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="Foreground" Value="Black" />
+                                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                                            <Setter Property="FontFamily" Value="Segoe UI" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+
+                                                    </GridView.ColumnHeaderContainerStyle>
+
+                                                    <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                    <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding Human3.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding Human1.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding Human5.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding Human6.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding Human4.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding Human2.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding Human.DisplayName}" ></GridViewColumn>
+
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </materialDesign:Card>
+                            </Grid>
+
+                            <materialDesign:Card Grid.Row="3" Margin="4 4 4 4" VerticalAlignment="Stretch">
+                                <StackPanel>
+                                    <WrapPanel HorizontalAlignment="Center">
+                                        <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0" Text="{Binding TimeWork, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0"  Text="{Binding DisplayNameStaffWorkManager, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" Foreground="DarkGreen" VerticalAlignment="Center"></TextBlock>
+
+                                        <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckWorkCommand}" CommandParameter="{Binding ElementName=checkWork}" Name="checkWork" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckWork}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi làm" FontWeight="Bold"></CheckBox>
+                                        <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckNoWorkCommand}" CommandParameter="{Binding ElementName=checkNoWork}" Name="checkNoWork" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckNoWork}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi trễ" FontWeight="Bold"></CheckBox>
+                                        <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding ChecGoLateCommand}" CommandParameter="{Binding ElementName=checkGoLate}" Name="checkGoLate" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckGoLate}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Không đi làm" FontWeight="Bold"></CheckBox>
+
+                                        <Button Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckInManagerCommand}" Content="Check In" Margin="4 3 0 0" Width="100" ToolTip="kiểm tra"
+                                                Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                    </WrapPanel>
+
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                        <ListView Name="Lv_CheckInWorkManager" ItemsSource="{Binding LvTimeTableManager}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridView.ColumnHeaderContainerStyle>
+                                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="Foreground" Value="Black" />
+                                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                                            <Setter Property="FontFamily" Value="Segoe UI" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+
+                                                    </GridView.ColumnHeaderContainerStyle>
+
+
+                                                    <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                    <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding CheckIdHumanSundayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding CheckIdHumanMondayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding CheckIdHumanTuesdayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding CheckIdHumanWednesdayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding CheckIdHumanThursdayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding CheckIdHumanFridayWork}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding CheckIdHumanSaturdayWork}" ></GridViewColumn>
+
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Librarian">
+                        <Grid Background="#2d3436">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <WrapPanel Grid.Row="0">
+                                <Button Command="{Binding AddTimeTableLibrarian}" Content="Create Time Table Librarian" Margin="4 4 0 0" Width="Auto" ToolTip="Thêm" HorizontalAlignment="Left"
+                                    Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                <Button Command="{Binding OuputLibrarianWordCommand}" Margin="4 4 0 0" Width="100" ToolTip="Thêm"
+                                                                Padding="0" Background="#feca57" FontWeight="Bold" FontFamily="Segoe UI"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                                    <WrapPanel>
+                                        <Image Margin="-15 0 0 0"  Source="/Images/Icon_Button/Word.png"></Image>
+                                        <TextBlock VerticalAlignment="Center" Text="   Word"></TextBlock>
+                                    </WrapPanel>
+                                </Button>
+
+
+                                <TextBlock Margin="100 0 0 0" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="White" Text="{Binding DateStartTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+                                <TextBlock Margin="15 0 0 0" FontSize="16" VerticalAlignment="Center" Foreground="White"  Text="{Binding EndDateTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+                            </WrapPanel>
+
+                            <Grid Grid.Row="1">
+                                <materialDesign:Card Margin="4 4 4 0" VerticalAlignment="Stretch">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                        <ListView Name="Lv_TimeTableLibrarian" ItemsSource="{Binding LvTimeTableLibrarian}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridView.ColumnHeaderContainerStyle>
+                                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="Foreground" Value="Black" />
+                                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                                            <Setter Property="FontFamily" Value="Segoe UI" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+
+                                                    </GridView.ColumnHeaderContainerStyle>
+
+                                                    <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                    <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding Human3.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding Human1.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding Human5.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding Human6.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding Human4.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding Human2.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding Human.DisplayName}" ></GridViewColumn>
+
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </materialDesign:Card>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <materialDesign:Card Margin="4 4 4 4" VerticalAlignment="Stretch">
+                                    <StackPanel>
+                                        <WrapPanel HorizontalAlignment="Center">
+                                            <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0" Text="{Binding TimeWork, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0"  Text="{Binding DisplayNameStaffWorkLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" Foreground="DarkGreen" VerticalAlignment="Center"></TextBlock>
+
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckWorkLibrarianCommand}" CommandParameter="{Binding ElementName=checkWorkLibrarian}" Name="checkWorkLibrarian" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckWorkLibrarian}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi làm" FontWeight="Bold"></CheckBox>
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckNoWorkLibrarianCommand}" CommandParameter="{Binding ElementName=checkNoWorkLibrarian}" Name="checkNoWorkLibrarian" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckNoWorkLibrarian}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi trễ" FontWeight="Bold"></CheckBox>
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding ChecGoLateLibrarianCommand}" CommandParameter="{Binding ElementName=checkGoLateLibrarian}" Name="checkGoLateLibrarian" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckGoLateLibrarian}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Không đi làm" FontWeight="Bold"></CheckBox>
+
+                                            <Button Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckInLibrarianCommand}" Content="Check In" Margin="4 2 0 0" Width="100" ToolTip="kiểm tra"
+                                                Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                        </WrapPanel>
+
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                            <ListView Name="Lv_CheckInWorkLibrarian" ItemsSource="{Binding LvTimeTableLibrarian}">
+                                                <ListView.ItemContainerStyle>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridView.ColumnHeaderContainerStyle>
+                                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                            <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                <Setter Property="Foreground" Value="Black" />
+                                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                                <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                <Setter Property="FontSize" Value="14" />
+                                                            </Style>
+
+                                                        </GridView.ColumnHeaderContainerStyle>
+
+
+                                                        <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                        <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding CheckIdHumanSundayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding CheckIdHumanMondayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding CheckIdHumanTuesdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding CheckIdHumanWednesdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding CheckIdHumanThursdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding CheckIdHumanFridayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding CheckIdHumanSaturdayWork}" ></GridViewColumn>
+
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                </materialDesign:Card>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Arranger">
+                        <Grid Background="#2d3436">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <WrapPanel Grid.Row="0">
+                                <Button Command="{Binding AddTimeTableArranger}" Content="Create Time Table Arranger" Margin="4 4 0 0" Width="Auto" ToolTip="Thêm" HorizontalAlignment="Left"
+                                    Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                <Button Command="{Binding OuputArrangerWordCommand}" Margin="4 4 0 0" Width="100" ToolTip="Thêm"
+                                         Padding="0" Background="#feca57" FontWeight="Bold" FontFamily="Segoe UI"  Foreground="Black" BorderBrush="Black" BorderThickness="1">
+                                    <WrapPanel>
+                                        <Image Margin="-15 0 0 0"  Source="/Images/Icon_Button/Word.png"></Image>
+                                        <TextBlock VerticalAlignment="Center" Text="   Word"></TextBlock>
+                                    </WrapPanel>
+                                </Button>
+
+
+                                <TextBlock Margin="100 0 0 0" HorizontalAlignment="Center" FontSize="16" VerticalAlignment="Center" Foreground="White" Text="{Binding DateStartTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+                                <TextBlock Margin="15 0 0 0" FontSize="16" VerticalAlignment="Center" Foreground="White"  Text="{Binding EndDateTimeTable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+
+                            </WrapPanel>
+
+                            <Grid Grid.Row="1">
+                                <materialDesign:Card Margin="4 4 4 0" VerticalAlignment="Stretch">
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                        <ListView Name="Lv_TimeTableArranger" ItemsSource="{Binding LvTimeTableArranger}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridView.ColumnHeaderContainerStyle>
+                                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                        <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                            <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                        </Border>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="Foreground" Value="Black" />
+                                                            <Setter Property="FontWeight" Value="DemiBold" />
+                                                            <Setter Property="FontFamily" Value="Segoe UI" />
+                                                            <Setter Property="FontSize" Value="14" />
+                                                        </Style>
+
+                                                    </GridView.ColumnHeaderContainerStyle>
+
+                                                    <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                    <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding Human3.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding Human1.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding Human5.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding Human6.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding Human4.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding Human2.DisplayName}" ></GridViewColumn>
+                                                    <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding Human.DisplayName}" ></GridViewColumn>
+
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </materialDesign:Card>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                                <materialDesign:Card Margin="4 4 4 4" VerticalAlignment="Stretch">
+                                    <StackPanel>
+                                        <WrapPanel HorizontalAlignment="Center">
+                                            <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0" Text="{Binding TimeWork, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Visibility="{Binding OptionVisibilityCheckIn}" Margin="5 3 5 0"  Text="{Binding DisplayNameStaffWorkArranger, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FontWeight="Bold" Foreground="DarkGreen" VerticalAlignment="Center"></TextBlock>
+
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckWorkArrangerCommand}" CommandParameter="{Binding ElementName=checkWorkArranger}" Name="checkWorkArranger" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckWorkArranger}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi làm" FontWeight="Bold"></CheckBox>
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckNoWorkArrangerCommand}" CommandParameter="{Binding ElementName=checkNoWorkArranger}" Name="checkNoWorkArranger" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckNoWorkArranger}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Đi trễ" FontWeight="Bold"></CheckBox>
+                                            <CheckBox Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding ChecGoLateArrangerCommand}" CommandParameter="{Binding ElementName=checkGoLateArranger}" Name="checkGoLateArranger" VerticalAlignment="Center"
+                                                      IsChecked="{Binding CheckGoLateArranger}" Style="{StaticResource MaterialDesignCheckBox}" Margin="5 3 5 0"  Content="Không đi làm" FontWeight="Bold"></CheckBox>
+
+                                            <Button Visibility="{Binding OptionVisibilityCheckIn}" Command="{Binding CheckInArrangerCommand}" Content="Check In" Margin="4 2 0 0" Width="100" ToolTip="kiểm tra"
+                                                Background="#12CBC4" FontWeight="Bold"  Foreground="Black" BorderBrush="Black" BorderThickness="1"></Button>
+
+                                        </WrapPanel>
+
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                            <ListView Name="Lv_CheckInWorkArranger" ItemsSource="{Binding LvTimeTableArranger}">
+                                                <ListView.ItemContainerStyle>
+                                                    <Style TargetType="ListViewItem">
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                    </Style>
+                                                </ListView.ItemContainerStyle>
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridView.ColumnHeaderContainerStyle>
+                                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                                            <Border BorderThickness="0,0,0,0" BorderBrush="Black" Background="Transparent">
+                                                                                <TextBlock x:Name="ContentHeader" Text="{TemplateBinding Content}" Padding="5,5,5,0" Width="{TemplateBinding Width}" TextAlignment="Center" />
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                                <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                <Setter Property="Foreground" Value="Black" />
+                                                                <Setter Property="FontWeight" Value="DemiBold" />
+                                                                <Setter Property="FontFamily" Value="Segoe UI" />
+                                                                <Setter Property="FontSize" Value="14" />
+                                                            </Style>
+
+                                                        </GridView.ColumnHeaderContainerStyle>
+
+
+                                                        <GridViewColumn Header="TimeStart" DisplayMemberBinding="{Binding TimeLine.TimeStart}" ></GridViewColumn>
+                                                        <GridViewColumn Header="EndTime" DisplayMemberBinding="{Binding TimeLine.EndTime}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Sunday" DisplayMemberBinding="{Binding CheckIdHumanSundayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Monday" DisplayMemberBinding="{Binding CheckIdHumanMondayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Tuesday" DisplayMemberBinding="{Binding CheckIdHumanTuesdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Wednesday" DisplayMemberBinding="{Binding CheckIdHumanWednesdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Thursday" DisplayMemberBinding="{Binding CheckIdHumanThursdayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Friday" DisplayMemberBinding="{Binding CheckIdHumanFridayWork}" ></GridViewColumn>
+                                                        <GridViewColumn Header="Saturday" DisplayMemberBinding="{Binding CheckIdHumanSaturdayWork}" ></GridViewColumn>
+
+                                                    </GridView>
+                                                </ListView.View>
+                                            </ListView>
+                                        </ScrollViewer>
+                                    </StackPanel>
+                                </materialDesign:Card>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                </dragablz:TabablzControl>
+            </Grid>
+
+            <Grid Grid.Column="1" MaxWidth="240">
+                <materialDesign:Card Margin="4">
+                    <StackPanel>
+
+                        <TextBlock Margin="0 0 1 0" Background="#2d3436" Foreground="White" Padding="5" Text="History" FontSize="15" FontWeight="Bold"></TextBlock>
+
+                        <StackPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ListBox ItemsSource="{Binding LvHistory}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock TextWrapping="Wrap" Text="{Binding DisplayName}"></TextBlock>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
