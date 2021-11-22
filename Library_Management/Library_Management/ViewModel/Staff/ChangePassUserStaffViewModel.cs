@@ -33,12 +33,17 @@ namespace Library_Management.ViewModel.Staff
             {
                 string passwordCurrentEncode = ComputeSha256Hash(MD5Hash(Password));
 
+                if (Password == NewPassword)
+                    return false;
+
                 var accCount = DataProvider.Ins.DB.UserStaffs.Where(x => (x.UserName == UserName && x.Password == passwordCurrentEncode) && x.CountDelete == 0).Count();
 
                 if (accCount > 0)
                     return true;
 
                 return false;
+
+                return true;
             }, (p) =>
             {
                 if (NewPassword == ReNewPassword)

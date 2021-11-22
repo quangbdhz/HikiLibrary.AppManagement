@@ -385,7 +385,7 @@ namespace Library_Management.ViewModel.Borrow
             paraEnter.TextAlignment = TextAlignment.Center;
             fd.Blocks.Add(paraEnter);
 
-            Paragraph paraBill = new Paragraph(new Run("Library Bills to Customer"));
+            Paragraph paraBill = new Paragraph(new Run("Bills Customer Borrow Book"));
             paraBill.LineHeight = 1;
             paraBill.FontSize = 20;
             paraBill.TextAlignment = TextAlignment.Center;

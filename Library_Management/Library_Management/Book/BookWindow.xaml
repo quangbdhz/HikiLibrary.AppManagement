@@ -77,11 +77,11 @@
 
                                                 <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                                          Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the book"
-                                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden" TextChanged="TextBox_TextChanged"
                                                          Name="tb_book" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" />
 
                                                 <Grid Grid.Column="2">
-                                                    <ComboBox SelectedIndex="0" Margin="8 4 0 0" BorderThickness="0" Name="OptionSearch"
+                                                    <ComboBox SelectedIndex="0" Margin="8 4 0 0" BorderThickness="0" Name="OptionSearch"  DropDownClosed="OptionSearch_DropDownClosed"
                                                          materialDesign:ColorZoneAssist.Mode="Inverted"  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                                                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                                                          BorderBrush="{DynamicResource MaterialDesignPaper}">
@@ -119,7 +119,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <TabControl  TabStripPlacement="Left" Name="nameTabControl">
+                <TabControl  TabStripPlacement="Left" Name="nameTabControl" MouseUp="nameTabControl_MouseUp">
                     <TabControl.Resources>
                         <Style TargetType="{x:Type TabItem}">
                             <Setter Property="FontWeight" Value="Bold"></Setter>

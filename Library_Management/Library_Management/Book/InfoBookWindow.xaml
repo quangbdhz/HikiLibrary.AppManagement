@@ -159,16 +159,17 @@
                                         <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
                                     </Button>
 
-                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TextChanged="TextBoxAuthor_TextChanged" 
                                      Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the author"  FontFamily="Segoe UI" FontWeight="Normal"
                                      Name="tb_author" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
 
                                     <Grid Grid.Column="2">
                                         <!--   Name="OptionSearchSubject" DropDownClosed="OptionSearchSubject_DropDownClosed"  TextChanged="TextBoxSubject_TextChanged"   -->
                                         <ComboBox SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
-                                          materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
-                                          materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
-                                          BorderBrush="{DynamicResource MaterialDesignPaper}">
+                                              Name="OptionSearchAuthor" DropDownClosed="OptionSearchAuthor_DropDownClosed"
+                                              materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
+                                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
+                                              BorderBrush="{DynamicResource MaterialDesignPaper}">
                                             <ComboBoxItem>Name</ComboBoxItem>
                                             <ComboBoxItem>Phone</ComboBoxItem>
                                             <ComboBoxItem>Email</ComboBoxItem>
@@ -269,13 +270,14 @@
                                         <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
                                     </Button>
 
-                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TextChanged="TextBoxSubject_TextChanged"
                                      Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the subject"  FontFamily="Segoe UI" FontWeight="Normal"
                                      Name="tb_subject" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
 
                                     <Grid Grid.Column="2">
-                                        <!--   Name="OptionSearchSubject" DropDownClosed="OptionSearchSubject_DropDownClosed"  TextChanged="TextBoxSubject_TextChanged"   -->
+                                        <!--     -->
                                         <ComboBox SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
+                                          Name="OptionSearchSubject" DropDownClosed="OptionSearchSubject_DropDownClosed" 
                                           materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                                           materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
                                           BorderBrush="{DynamicResource MaterialDesignPaper}">
@@ -413,13 +415,14 @@
                                         <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
                                     </Button>
 
-                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextChanged="TextBoxPublisher_TextChanged"
                                      Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the publisher"  FontFamily="Segoe UI" FontWeight="Normal"
                                      Name="tb_publisher" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
 
                                     <Grid Grid.Column="2">
-                                        <!--   Name="OptionSearchSubject" DropDownClosed="OptionSearchSubject_DropDownClosed"  TextChanged="TextBoxSubject_TextChanged"   -->
+                                        <!--    TextChanged="TextBoxSubject_TextChanged"   -->
                                         <ComboBox SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
+                                          Name="OptionSearchPublisher" DropDownClosed="OptionSearchPublisher_DropDownClosed"
                                           materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                                           materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
                                           BorderBrush="{DynamicResource MaterialDesignPaper}">
@@ -526,13 +529,14 @@
                                         <materialDesign:PackIcon Kind="Magnify" Foreground="White" />
                                     </Button>
 
-                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                    <TextBox Text="{Binding DisplayNameSearchCustomer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  TextChanged="TextBoxLanguage_TextChanged"
                                      Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search the language"  FontFamily="Segoe UI" FontWeight="Normal"
                                      Name="tb_language" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" materialDesign:TextFieldAssist.DecorationVisibility="Hidden"/>
 
                                     <Grid Grid.Column="2">
                                         <!--   Name="OptionSearchSubject" DropDownClosed="OptionSearchSubject_DropDownClosed"  TextChanged="TextBoxSubject_TextChanged"   -->
                                         <ComboBox SelectedIndex="0" Margin="8 4 10 0" MinWidth="50" BorderThickness="0"  FontFamily="Segoe UI" FontWeight="Normal" 
+                                          Name="OptionSearchLanguage" DropDownClosed="OptionSearchLanguage_DropDownClosed"
                                           materialDesign:ColorZoneAssist.Mode="Inverted" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource MaterialDesignPaper}"
                                           materialDesign:TextFieldAssist.DecorationVisibility="Hidden" HorizontalContentAlignment="Center"
                                           BorderBrush="{DynamicResource MaterialDesignPaper}">

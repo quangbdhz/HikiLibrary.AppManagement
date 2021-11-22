@@ -28,6 +28,7 @@ namespace Library_Management.Book
         public AddBookWindow()
         {
             InitializeComponent();
+
         }
 
         private void CB_Subject_Click(object sender, RoutedEventArgs e)

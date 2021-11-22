@@ -192,7 +192,10 @@ namespace Library_Management.ViewModel.Book
 
         public InfoBookViewModel()
         {
-            LvAuthor = new ObservableCollection<Model.Author>(DataProvider.Ins.DB.Authors);
+            LvAuthor = new ObservableCollection<Model.Author>(DataProvider.Ins.DB.Authors.Where(x => x.CountDelete == 0));
+
+            
+
             LvSubject = new ObservableCollection<Model.BookSubject>(DataProvider.Ins.DB.BookSubjects.Where(x => x.CountDelete == 0));
             LvPublisher = new ObservableCollection<Model.Publisher>(DataProvider.Ins.DB.Publishers.Where(x => x.CountDelete == 0));
             LvLanguage = new ObservableCollection<Model.Language>(DataProvider.Ins.DB.Languages.Where(x => x.CountDelete == 0));
@@ -222,7 +225,6 @@ namespace Library_Management.ViewModel.Book
 
                 LvAuthor.Add(Author);
 
-                MessageBox.Show("Successful");
             });
 
             EditAuthorCommand = new RelayCommand<Button>((p) => {

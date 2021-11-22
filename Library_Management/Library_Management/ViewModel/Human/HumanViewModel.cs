@@ -192,8 +192,24 @@ namespace Library_Management.ViewModel.Human
         public HumanViewModel()
         {
             LvHuman = new ObservableCollection<Model.Human>(DataProvider.Ins.DB.Humen.Where(x => x.CountDelete == 0));
-            LvAuthorityHuman = new ObservableCollection<Model.AuthorityHuman>(DataProvider.Ins.DB.AuthorityHumen.Where(x => x.Id < 5));
-            //LvAuthorityHuman = new ObservableCollection<Model.AuthorityHuman>(DataProvider.Ins.DB.AuthorityHumen.Where(x => x.CountDelete == 0));
+            LvAuthorityHuman = new ObservableCollection<Model.AuthorityHuman>();
+
+            var getDataAuthorityHuman = DataProvider.Ins.DB.load_data_AuthorityHuman().ToList();
+
+            foreach (var item in getDataAuthorityHuman)
+            {
+                if(item.Id < 5)
+                {
+                    AuthorityHuman authorityHuman = new AuthorityHuman();
+                    authorityHuman.Id = item.Id;
+                    authorityHuman.DisplayName = item.DisplayName;
+                    authorityHuman.CountDelete = item.CountDelete;
+                    LvAuthorityHuman.Add(authorityHuman);
+                }
+            }
+
+            var getViewHuman = DataProvider.Ins.DB.Human_vi.ToList();
+
             LvGender = new ObservableCollection<Model.Gender>(DataProvider.Ins.DB.Genders);
 
             #region Comamnd Human

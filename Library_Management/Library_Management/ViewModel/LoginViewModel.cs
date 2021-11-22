@@ -130,8 +130,8 @@ namespace Library_Management.ViewModel
 
         public LoginViewModel()
         {
-            UserName = "oreki";
-            Password = "12345";
+            UserName = "";
+            Password = "";
             CheckCustomer = true;
             GetRuleLoginBorrowBook = 0;
 
@@ -141,11 +141,11 @@ namespace Library_Management.ViewModel
                 return true; 
             }, (p) => 
             {
-                //p.Hide();
+                p.Hide();
 
-                //SplashScreen SS = new SplashScreen(); SS.ShowDialog();
+                SplashScreen SS = new SplashScreen(); SS.ShowDialog();
 
-                //p.Show();
+                p.Show();
             });
 
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
@@ -193,9 +193,9 @@ namespace Library_Management.ViewModel
                 return;
             }
 
-            //if (Password == "" || Password.Length < 5)
+            //if (password == "" || password.length < 5)
             //{
-            //    MessageBox.Show("Wrong password format");
+            //    messagebox.show("wrong password format");
             //    return;
             //}
 

@@ -188,6 +188,8 @@ namespace Library_Management.ViewModel.Book
             LvBookBorrowed = new ObservableCollection<Model.Book>();
             LvBookLiquidation = new ObservableCollection<Model.Book>();
 
+            
+
             LoadBook();
             OptionTabControl = 0;
 
@@ -349,6 +351,7 @@ namespace Library_Management.ViewModel.Book
             LvBookLiquidation.Clear();
 
             LvBook = new ObservableCollection<Model.Book>(DataProvider.Ins.DB.Books.Where(x => x.CountDelete == 0));
+
             foreach (Model.Book item in LvBook)
             {
                 if (item.IdStatus == 2 && item.IdStatusReturnBookToHuman == 4)

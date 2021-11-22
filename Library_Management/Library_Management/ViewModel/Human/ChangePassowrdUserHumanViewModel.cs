@@ -50,8 +50,6 @@ namespace Library_Management.ViewModel.Human
                 if (accCount > 0)
                     return true;
                 
-                
-
                 return false;
             }, (p) =>
             {
